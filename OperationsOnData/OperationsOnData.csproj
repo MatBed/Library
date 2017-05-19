@@ -114,12 +114,21 @@
     <Compile Include="Interfaces\ILibraryContext.cs" />
     <Compile Include="Interfaces\ILibraryOperations.cs" />
     <Compile Include="Library_Operations\LibraryOperations.cs" />
+    <Compile Include="Migrations\201705191533481_initial.cs" />
+    <Compile Include="Migrations\201705191533481_initial.Designer.cs">
+      <DependentUpon>201705191533481_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705191533481_initial.resx">
+      <DependentUpon>201705191533481_initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

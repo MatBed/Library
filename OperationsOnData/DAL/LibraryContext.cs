@@ -1,4 +1,5 @@
-﻿using OperationsOnData.Interfaces;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using OperationsOnData.Interfaces;
 using OperationsOnData.Models;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Web;
 
 namespace OperationsOnData.DAL
 {
-    public class LibraryContext : DbContext, ILibraryContext
+    public class LibraryContext : IdentityDbContext, ILibraryContext
     {
-        public LibraryContext() : base("LibraryConnection")
+        public LibraryContext() : base("Library")
         {
 
         }
