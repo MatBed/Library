@@ -118,6 +118,10 @@
     <Compile Include="Migrations\201705191533481_initial.Designer.cs">
       <DependentUpon>201705191533481_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705201712513_addAdmin.cs" />
+    <Compile Include="Migrations\201705201712513_addAdmin.Designer.cs">
+      <DependentUpon>201705201712513_addAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -127,6 +131,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705191533481_initial.resx">
       <DependentUpon>201705191533481_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705201712513_addAdmin.resx">
+      <DependentUpon>201705201712513_addAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
