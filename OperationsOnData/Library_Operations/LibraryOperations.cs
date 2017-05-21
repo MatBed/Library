@@ -21,5 +21,26 @@ namespace OperationsOnData.Library_Operations
             var books = LibraryDb.Books;
             return books;
         }
+
+        public void AddBook(Book book)
+        {
+            LibraryDb.Books.Add(book);
+        }
+
+        public void SaveChanges()
+        {
+            LibraryDb.SaveChanges();
+        }
+
+        public void RemoveBook(Book book)
+        {
+            LibraryDb.Books.Remove(book);
+        }
+
+        public Book FindById(int id)
+        {
+            var foundBook = LibraryDb.Books.Find(id);
+            return foundBook;
+        }
     }
 }

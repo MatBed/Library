@@ -25,40 +25,55 @@ namespace Library.Controllers
         public ActionResult Index()
         {
             var books = libraryOperations.GetBooks();
-            return View("Index", books);
+            return View(books);
         }
 
-        
 
-        //// GET: Books/Create
-        //public ActionResult Create()
-        //{
-        //    return View("Create");   
-        //}
 
-        //// POST: Books/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "BookId,Title,Author,Type,NumberOfPages,Status,UserId")] Book book)
-        //{
-            
-        //}
+        // GET: Books/Create
+        [Authorize]
+        public ActionResult Create()
+        {
+            return View("Create");
+        }
 
-        
+        // POST: Books/Create
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Title,Author,Type,NumberOfPages,Status")] Book book)
+        {
+            if (ModelState.IsValid)
+            {
+                book.Status = Status.Available;
+                libraryOperations.AddBook(book);
+                libraryOperations.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+                return View(book);
 
-        //// GET: Books/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    return View("Delete");
-        //}
+            //return View("Index");
+        }
 
-        //// POST: Books/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id)
-        //{
-            
-        //}
+        // POST: Books/Delete/5
+        [HttpPost]
+        [Authorize]
+        public ActionResult Delete(int id)
+        {
+            var book = libraryOperations.FindById(id);
+
+            try
+            {
+                libraryOperations.RemoveBook(book);
+                libraryOperations.SaveChanges();                
+            }
+            catch
+            {
+                return View("Index");
+            }
+            return RedirectToAction("Index");
+        }
 
         //protected override void Dispose(bool disposing)
         //{

@@ -10,5 +10,9 @@ namespace OperationsOnData.Interfaces
     public interface ILibraryOperations
     {
         IQueryable<Book> GetBooks();
+        void AddBook(Book book);
+        void SaveChanges();
+        void RemoveBook(Book book);
+        Book FindById(int id);
     }
 }

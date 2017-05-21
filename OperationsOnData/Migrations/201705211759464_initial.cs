@@ -12,9 +12,9 @@ namespace OperationsOnData.Migrations
                 c => new
                     {
                         BookId = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        Author = c.String(),
-                        Type = c.String(),
+                        Title = c.String(nullable: false, maxLength: 40),
+                        Author = c.String(nullable: false, maxLength: 40),
+                        Type = c.String(nullable: false, maxLength: 25),
                         NumberOfPages = c.Int(nullable: false),
                         Status = c.Int(nullable: false),
                         UserId = c.String(maxLength: 128),
