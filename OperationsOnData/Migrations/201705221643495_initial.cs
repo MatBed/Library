@@ -17,6 +17,9 @@ namespace OperationsOnData.Migrations
                         Type = c.String(nullable: false, maxLength: 25),
                         NumberOfPages = c.Int(nullable: false),
                         Status = c.Int(nullable: false),
+                        BookingDate = c.DateTime(),
+                        BorrowingDate = c.DateTime(),
+                        ReturnDate = c.DateTime(),
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.BookId)
@@ -39,6 +42,9 @@ namespace OperationsOnData.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        Name = c.String(),
+                        SecondName = c.String(),
+                        NumberOfBorrowBooks = c.Byte(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)

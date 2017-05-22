@@ -12,7 +12,8 @@ namespace OperationsOnData.Interfaces
         IQueryable<Book> GetBooks();
         void AddBook(Book book);
         void SaveChanges();
-        void RemoveBook(Book book);
+        void RemoveBook(int id);
         Book FindById(int id);
+        void Booking(int id);
     }
 }

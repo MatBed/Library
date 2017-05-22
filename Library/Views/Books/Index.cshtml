@@ -53,14 +53,24 @@
             </td>
 
             <td>
+                @if (item.Status == OperationsOnData.Models.Status.Available)
+                {
+                    using (Html.BeginForm("Reservation", "Books", new { id = item.BookId }, FormMethod.Post))
+                    {
+                        @Html.Hidden("BookId", item.BookId)
+                        <input type="submit" value="Reserve" onclick="return confirm('Are you sure?')" class="btn btn-success" />
+                    }
+                }
+                
+
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
                     using (Html.BeginForm("Delete", "Books", new { id = item.BookId }, FormMethod.Post))
                     {
-                        @Html.Hidden("ProductId", item.BookId)
+                        @Html.Hidden("BookId", item.BookId)
                         <input type="submit" value="Delete" onclick="return confirm('Are you sure you want delete this book?')" class="btn btn-danger" />
+                        }
                     }
-                }
                 
             </td>
         </tr>

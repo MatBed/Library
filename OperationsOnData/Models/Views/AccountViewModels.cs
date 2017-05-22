@@ -64,6 +64,13 @@ namespace Library.Models
 
     public class RegisterViewModel
     {
+        [Required(ErrorMessage = "This field is required!")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "This field is required!")]
+        [Display(Name = "Second Name")]
+        public string SecondName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

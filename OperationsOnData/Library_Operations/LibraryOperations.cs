@@ -32,8 +32,9 @@ namespace OperationsOnData.Library_Operations
             LibraryDb.SaveChanges();
         }
 
-        public void RemoveBook(Book book)
+        public void RemoveBook(int id)
         {
+            var book = FindById(id);
             LibraryDb.Books.Remove(book);
         }
 
@@ -41,6 +42,13 @@ namespace OperationsOnData.Library_Operations
         {
             var foundBook = LibraryDb.Books.Find(id);
             return foundBook;
+        }
+
+        public void Booking(int id)
+        {
+            var book = FindById(id);
+            book.BookingDate = DateTime.Now;
+            book.Status = Status.Booked;
         }
     }
 }

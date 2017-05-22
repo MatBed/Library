@@ -28,6 +28,21 @@ namespace OperationsOnData.Models
 
         public Status Status { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Booking date")]
+        public DateTime? BookingDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Borrowing date")]
+        public DateTime? BorrowingDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Return date")]
+        public DateTime? ReturnDate { get; set; }
+
         public string UserId { get; set; }
         public User User { get; set; }
     }

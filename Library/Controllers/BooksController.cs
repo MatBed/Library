@@ -28,8 +28,6 @@ namespace Library.Controllers
             return View(books);
         }
 
-
-
         // GET: Books/Create
         [Authorize]
         public ActionResult Create()
@@ -61,17 +59,32 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult Delete(int id)
         {
-            var book = libraryOperations.FindById(id);
-
             try
             {
-                libraryOperations.RemoveBook(book);
+                libraryOperations.RemoveBook(id);
                 libraryOperations.SaveChanges();                
             }
             catch
             {
                 return View("Index");
             }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Reservation(int id)
+        {
+            try
+            {
+                libraryOperations.Booking(id);
+                libraryOperations.SaveChanges();
+            }
+            catch
+            {
+                return View("Index");
+            }
+
             return RedirectToAction("Index");
         }
 

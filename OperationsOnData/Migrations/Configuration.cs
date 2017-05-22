@@ -1,8 +1,5 @@
 namespace OperationsOnData.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using OperationsOnData.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -29,6 +26,6 @@ namespace OperationsOnData.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-        }        
+        }
     }
 }

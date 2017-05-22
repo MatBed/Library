@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace OperationsOnData.Models
 {
@@ -15,6 +16,16 @@ namespace OperationsOnData.Models
         {
             this.Books = new HashSet<Book>();
         }
+
+        [Required(ErrorMessage = "This field is required!")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "This field is required!")]
+        [Display(Name = "Second Name")]
+        public string SecondName { get; set; }
+
+        [Range(0, 5)]
+        public byte NumberOfBorrowBooks { get; set; }
 
         public virtual ICollection<Book> Books { get; private set; }
 

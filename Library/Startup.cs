@@ -38,6 +38,8 @@ namespace Library
                 var user = new User();
                 user.UserName = "admin@gmail.com";
                 user.Email = "admin@gmail.com";
+                user.Name = "Admin";
+                user.SecondName = "Admin";
 
                 string userPWD = "1234Abcd@";
 
