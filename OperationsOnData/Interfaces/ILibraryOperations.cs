@@ -15,5 +15,6 @@ namespace OperationsOnData.Interfaces
         void RemoveBook(int id);
         Book FindById(int id);
         void Booking(Book book);
+        void CancleBooking(Book book);
     }
 }

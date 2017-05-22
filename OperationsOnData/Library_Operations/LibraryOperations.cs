@@ -49,5 +49,11 @@ namespace OperationsOnData.Library_Operations
             book.BookingDate = DateTime.Now.Date;
             book.Status = Status.Booked;
         }
+
+        public void CancleBooking(Book book)
+        {
+            book.BookingDate = null;
+            book.Status = Status.Available;
+        }
     }
 }

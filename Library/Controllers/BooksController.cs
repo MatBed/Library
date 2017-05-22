@@ -99,6 +99,26 @@ namespace Library.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [Authorize]
+        public ActionResult CancleReservation(int id)
+        {
+            var book = libraryOperations.FindById(id);
+
+            try
+            {
+                libraryOperations.CancleBooking(book);
+                book.UserId = null;
+                libraryOperations.SaveChanges();
+            }
+            catch
+            {
+                return View("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)
