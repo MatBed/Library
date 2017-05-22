@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OperationsOnData.DAL;
 using OperationsOnData.Models;
 using OperationsOnData.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace Library.Controllers
 {
@@ -25,6 +26,13 @@ namespace Library.Controllers
         public ActionResult Index()
         {
             var books = libraryOperations.GetBooks();
+            return View(books);
+        }
+
+        public ActionResult ShowBookedBooks()
+        {
+            var userId = User.Identity.GetUserId();
+            var books = libraryOperations.GetBooks().Where(m => m.Status == Status.Booked && m.UserId == userId);
             return View(books);
         }
 
@@ -75,9 +83,12 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult Reservation(int id)
         {
+            var book = libraryOperations.FindById(id);
+
             try
             {
-                libraryOperations.Booking(id);
+                libraryOperations.Booking(book);
+                book.UserId = User.Identity.GetUserId();
                 libraryOperations.SaveChanges();
             }
             catch

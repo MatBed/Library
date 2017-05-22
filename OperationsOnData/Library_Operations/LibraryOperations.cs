@@ -44,10 +44,9 @@ namespace OperationsOnData.Library_Operations
             return foundBook;
         }
 
-        public void Booking(int id)
+        public void Booking(Book book)
         {
-            var book = FindById(id);
-            book.BookingDate = DateTime.Now;
+            book.BookingDate = DateTime.Now.Date;
             book.Status = Status.Booked;
         }
     }
