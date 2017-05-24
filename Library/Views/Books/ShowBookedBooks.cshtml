@@ -4,6 +4,13 @@
     ViewBag.Title = "ShowBookedBooks";
 }
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
 <h2>Your booked books</h2>
 
 <table class="table">

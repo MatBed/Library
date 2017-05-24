@@ -89,13 +89,14 @@ namespace Library.Controllers
             {
                 libraryOperations.Booking(book);
                 book.UserId = User.Identity.GetUserId();
-                libraryOperations.SaveChanges();
+                libraryOperations.SaveChanges();                
             }
             catch
             {
                 return View("Index");
             }
 
+            TempData["Message"] = "Resevation successful!";
             return RedirectToAction("Index");
         }
 
@@ -116,7 +117,8 @@ namespace Library.Controllers
                 return View("Index");
             }
 
-            return RedirectToAction("Index");
+            TempData["Message"] = "Operation successful!";
+            return RedirectToAction("ShowBookedBooks");
         }
 
         //protected override void Dispose(bool disposing)
