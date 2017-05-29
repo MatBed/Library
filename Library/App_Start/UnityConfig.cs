@@ -45,6 +45,7 @@ namespace Library.App_Start
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<ILibraryContext, LibraryContext>(new PerRequestLifetimeManager());
             container.RegisterType<ILibraryOperations, LibraryOperations>(new PerRequestLifetimeManager());
+            container.RegisterType<IAdminOperations, AdminOperations>(new PerRequestLifetimeManager());
         }
     }
 }

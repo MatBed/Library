@@ -129,8 +129,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\LibraryContext.cs" />
+    <Compile Include="Interfaces\IAdminOperations.cs" />
     <Compile Include="Interfaces\ILibraryContext.cs" />
     <Compile Include="Interfaces\ILibraryOperations.cs" />
+    <Compile Include="Library_Operations\AdminOperations.cs" />
     <Compile Include="Library_Operations\LibraryOperations.cs" />
     <Compile Include="Migrations\201705221643495_initial.cs" />
     <Compile Include="Migrations\201705221643495_initial.Designer.cs">

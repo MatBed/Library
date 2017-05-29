@@ -61,7 +61,7 @@ namespace Library.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
-
+        
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "This field is required!")]

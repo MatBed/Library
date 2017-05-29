@@ -36,6 +36,13 @@ namespace Library.Controllers
             return View(books);
         }
 
+        public ActionResult ShowBorrowedBooks()
+        {
+            var userId = User.Identity.GetUserId();
+            var books = libraryOperations.GetBooks().Where(m => m.Status == Status.Borrowed && m.UserId == userId);
+            return View(books);
+        }
+
         // GET: Books/Create
         [Authorize]
         public ActionResult Create()

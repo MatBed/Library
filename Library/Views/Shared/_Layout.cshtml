@@ -35,10 +35,14 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Your books <span class="caret"></span> </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>@Html.ActionLink("Booked books", "ShowBookedBooks", "Books")</li>
-                                <li>@Html.ActionLink("Borrowed books", "Index", "Books")</li>
+                                <li>@Html.ActionLink("Borrowed books", "ShowBorrowedBooks", "Books")</li>                                
                             </ul>
                         </li>
-                    }                    
+                    } 
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Show Users", "ShowUsers", "User")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
