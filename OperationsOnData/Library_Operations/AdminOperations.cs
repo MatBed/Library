@@ -1,4 +1,5 @@
 ﻿using OperationsOnData.Interfaces;
+using OperationsOnData.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,12 @@ namespace OperationsOnData.Library_Operations
         {
             var users = LibraryDb.Users;
             return users;
+        }
+
+        public User FindUser(string id)
+        {
+            User user = LibraryDb.Users.Find(id);
+            return user;
         }
     }
 }

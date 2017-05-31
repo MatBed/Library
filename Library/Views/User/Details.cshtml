@@ -1,0 +1,49 @@
+﻿@model OperationsOnData.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Informations about User</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Name):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondName):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfBorrowBooks):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfBorrowBooks)
+        </dd>
+
+    </dl>
+</div>
+
+<center><h4>Borrowed/Booked Books</h4></center>
+
