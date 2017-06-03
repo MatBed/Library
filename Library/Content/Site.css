@@ -3,6 +3,12 @@
     padding-bottom: 20px;
 }
 
+div {
+    color: black;
+    font-size: large;
+    font-weight: 600;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
