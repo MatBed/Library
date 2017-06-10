@@ -72,11 +72,11 @@
                     }
                     else
                     {
-                        @Html.ActionLink("Reservation", "Login", "Account", null, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Reserve", "Login", "Account", null, new { @class = "btn btn-success" })
                     }
                 }
 
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") && item.Status == OperationsOnData.Models.Status.Available)
                 {
                     using (Html.BeginForm("Delete", "Books", new { id = item.BookId }, FormMethod.Post))
                     {

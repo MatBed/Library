@@ -4,10 +4,10 @@
 }
 
 .backgroundimg {
-    background-image: url('https://wallpaperscraft.com/image/book_page_leaves_82167_1920x1080.jpg');
+    background-image: url('../Images/background.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    height: 100vh;
-    width: 100%;
+    height: 94.8vh;
+    width: 101%;
 }
