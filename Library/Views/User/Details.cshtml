@@ -1,4 +1,4 @@
-﻿@model OperationsOnData.Models.User
+﻿@model OperationsOnData.ViewModels.BooksAndUserViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -9,41 +9,84 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        
+
         <dt>
-            @Html.DisplayNameFor(model => model.Name):
+            @Html.DisplayNameFor(model => model.User.Name):
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.User.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SecondName):
+            @Html.DisplayNameFor(model => model.User.SecondName):
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SecondName)
+            @Html.DisplayFor(model => model.User.SecondName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email):
+            @Html.DisplayNameFor(model => model.User.Email):
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NumberOfBorrowBooks):
+            @Html.DisplayNameFor(model => model.User.NumberOfBorrowBooks):
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NumberOfBorrowBooks)
+            @Html.DisplayFor(model => model.User.NumberOfBorrowBooks)
         </dd>
 
     </dl>
 </div>
 
-<center><h3>Borrowed/Booked Books</h3></center>
+<br /> <br />
 
+<center><h2>Borrowed/Booked Books</h2></center>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.NumberOfPages)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Status)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model.Books)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfPages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+    }
+</table>

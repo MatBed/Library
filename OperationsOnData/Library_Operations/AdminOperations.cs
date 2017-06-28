@@ -1,5 +1,6 @@
 ﻿using OperationsOnData.Interfaces;
 using OperationsOnData.Models;
+using OperationsOnData.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace OperationsOnData.Library_Operations
             this.LibraryDb = LibraryDb;
         }
 
-        public IQueryable GetUsers()
+        public IQueryable<User> GetUsers()
         {
             var users = LibraryDb.Users;
             return users;
@@ -26,6 +27,19 @@ namespace OperationsOnData.Library_Operations
         {
             User user = LibraryDb.Users.Find(id);
             return user;
+        }
+
+        public BooksAndUserViewModel GetBooksOfUser(string id)
+        {
+            LibraryOperations libraryOperations = new LibraryOperations(LibraryDb);
+            BooksAndUserViewModel booksAndUserViewModel = new BooksAndUserViewModel();
+
+            var allUsers = GetUsers();
+            var allBooks = libraryOperations.GetBooks();
+            booksAndUserViewModel.User = allUsers.Where(m => m.Id == id).FirstOrDefault();
+            booksAndUserViewModel.Books = allBooks.Where(m => m.UserId == id);
+
+            return booksAndUserViewModel;
         }
     }
 }

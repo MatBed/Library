@@ -1,4 +1,5 @@
 ﻿using OperationsOnData.Models;
+using OperationsOnData.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace OperationsOnData.Interfaces
 {
     public interface IAdminOperations
     {
-        IQueryable GetUsers();
+        IQueryable<User> GetUsers();
         User FindUser(string id);
+        BooksAndUserViewModel GetBooksOfUser(string id);
     }
 }

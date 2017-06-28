@@ -25,7 +25,11 @@ namespace Library.Controllers
         public ActionResult Details(string id)
         {
             var foundUser = AdminOperations.FindUser(id);
-            return View(foundUser);
+            var foundBooks = AdminOperations.GetBooksOfUser(id);
+
+            var foundUserAndBooks = AdminOperations.GetBooksOfUser(id);
+
+            return View(foundUserAndBooks);
         }
     }
 }
