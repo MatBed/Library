@@ -298,6 +298,7 @@
     <Content Include="Views\Books\ShowBorrowedBooks.cshtml" />
     <Content Include="Views\User\ShowUsers.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\Books\ChangeStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

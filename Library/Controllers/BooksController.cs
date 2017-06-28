@@ -128,6 +128,29 @@ namespace Library.Controllers
             return RedirectToAction("ShowBookedBooks");
         }
 
+        public ActionResult ChangeStatus(int id)
+        {
+            var book = libraryOperations.FindById(id);
+            return View(book);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(Book book)
+        {
+            var userId = book.UserId;
+            try
+            {
+                libraryOperations.ChangeStatus(book);
+                libraryOperations.SaveChanges();
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
+            return RedirectToAction("Details", "User", new { id = userId });
+        }
+
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)

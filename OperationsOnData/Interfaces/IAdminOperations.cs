@@ -13,5 +13,6 @@ namespace OperationsOnData.Interfaces
         IQueryable<User> GetUsers();
         User FindUser(string id);
         BooksAndUserViewModel GetBooksOfUser(string id);
+
     }
 }

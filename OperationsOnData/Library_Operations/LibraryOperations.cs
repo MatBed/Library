@@ -55,5 +55,23 @@ namespace OperationsOnData.Library_Operations
             book.BookingDate = null;
             book.Status = Status.Available;
         }
+
+        public void ChangeStatus(Book book)
+        {
+            if (book.Status == Status.Available)
+            {
+                book.UserId = null;
+                book.BookingDate = null;
+                book.BorrowingDate = null;
+            }                
+
+            if(book.Status == Status.Borrowed)
+            {
+                book.BookingDate = null;
+                book.BorrowingDate = DateTime.Now.Date;
+            }
+
+            LibraryDb.Entry(book).State = System.Data.Entity.EntityState.Modified;
+        }
     }
 }
