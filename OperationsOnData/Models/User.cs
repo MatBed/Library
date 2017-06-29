@@ -26,7 +26,7 @@ namespace OperationsOnData.Models
 
         [Range(0, 5)]
         [Display(Name = "Count of books")]
-        public byte NumberOfBorrowBooks { get; set; }
+        public byte NumberOfBooks { get; set; }
 
         public virtual ICollection<Book> Books { get; private set; }
 

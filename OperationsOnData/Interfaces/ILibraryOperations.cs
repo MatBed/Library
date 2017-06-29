@@ -1,4 +1,5 @@
 ﻿using OperationsOnData.Models;
+using OperationsOnData.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,13 @@ namespace OperationsOnData.Interfaces
         void SaveChanges();
         void RemoveBook(int id);
         Book FindById(int id);
-        void Booking(Book book);
-        void CancleBooking(Book book);
-        void ChangeStatus(Book book);
+        void Booking(Book book, string id);
+        void CancleBooking(Book book, string id);
+        void ChangeStatus(Book book, string id);
+
+        IQueryable<User> GetUsers();
+        void RemoveUser(string id);
+        User FindUserById(string id);
+        BooksAndUserViewModel GetBooksOfUser(string id);
     }
 }

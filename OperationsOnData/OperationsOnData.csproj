@@ -129,26 +129,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\LibraryContext.cs" />
-    <Compile Include="Interfaces\IAdminOperations.cs" />
     <Compile Include="Interfaces\ILibraryContext.cs" />
     <Compile Include="Interfaces\ILibraryOperations.cs" />
-    <Compile Include="Library_Operations\AdminOperations.cs" />
     <Compile Include="Library_Operations\LibraryOperations.cs" />
-    <Compile Include="Migrations\201705221643495_initial.cs" />
-    <Compile Include="Migrations\201705221643495_initial.Designer.cs">
-      <DependentUpon>201705221643495_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BooksAndUserViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705221643495_initial.resx">
-      <DependentUpon>201705221643495_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

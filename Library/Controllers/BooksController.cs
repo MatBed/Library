@@ -22,7 +22,6 @@ namespace Library.Controllers
             this.libraryOperations = libraryOperations;
         }
 
-        // GET: Books
         public ActionResult Index()
         {
             var books = libraryOperations.GetBooks();
@@ -43,14 +42,12 @@ namespace Library.Controllers
             return View(books);
         }
 
-        // GET: Books/Create
         [Authorize]
         public ActionResult Create()
         {
             return View("Create");
         }
 
-        // POST: Books/Create
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -69,7 +66,6 @@ namespace Library.Controllers
             //return View("Index");
         }
 
-        // POST: Books/Delete/5
         [HttpPost]
         [Authorize]
         public ActionResult Delete(int id)
@@ -91,10 +87,11 @@ namespace Library.Controllers
         public ActionResult Reservation(int id)
         {
             var book = libraryOperations.FindById(id);
+            var userId = User.Identity.GetUserId();
 
             try
             {
-                libraryOperations.Booking(book);
+                libraryOperations.Booking(book, userId);
                 book.UserId = User.Identity.GetUserId();
                 libraryOperations.SaveChanges();                
             }
@@ -112,10 +109,11 @@ namespace Library.Controllers
         public ActionResult CancleReservation(int id)
         {
             var book = libraryOperations.FindById(id);
+            var userId = User.Identity.GetUserId();
 
             try
             {
-                libraryOperations.CancleBooking(book);
+                libraryOperations.CancleBooking(book, userId);
                 book.UserId = null;
                 libraryOperations.SaveChanges();
             }
@@ -140,7 +138,7 @@ namespace Library.Controllers
             var userId = book.UserId;
             try
             {
-                libraryOperations.ChangeStatus(book);
+                libraryOperations.ChangeStatus(book, userId);
                 libraryOperations.SaveChanges();
             }
             catch
