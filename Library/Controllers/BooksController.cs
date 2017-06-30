@@ -22,10 +22,33 @@ namespace Library.Controllers
             this.libraryOperations = libraryOperations;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string BooksSought)
         {
-            var books = libraryOperations.GetBooks();
-            return View(books);
+            IEnumerable<Book> foundBooks;
+
+            if (BooksSought == "")
+                BooksSought = null;
+
+            if (BooksSought != null)
+            {
+                foundBooks = libraryOperations.GetBooks().Where(s => s.Title == BooksSought || s.Author == BooksSought || s.Type == BooksSought);
+
+                if (foundBooks.Count() == 0)
+                {
+                    ViewBag.Error = true;
+                    return View(foundBooks.OrderBy(o => o.Type));
+                }
+            }
+            else
+                foundBooks = libraryOperations.GetBooks();
+
+            if (Request.IsAjaxRequest())
+                return View(foundBooks.OrderBy(o => o.Type));
+
+            return View(foundBooks.OrderBy(o => o.Type));
+
+            //var books = libraryOperations.GetBooks();
+            //return View(books);
         }
 
         public ActionResult ShowBookedBooks()

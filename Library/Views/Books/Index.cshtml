@@ -12,6 +12,14 @@
 }
 
 <h2>List of books</h2>
+<br />
+<div>
+    <form style="color:black" id="search" method="get" , data-ajax="true" data-ajax-target="#booksList" data-ajax-update="#booksList">
+        <input id="BooksSought" , name="BooksSought" placeholder="Title, author or type" style="width: 200px" />
+        <input type="submit" value="Search" />
+    </form>
+    <br /><br />
+</div>
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
