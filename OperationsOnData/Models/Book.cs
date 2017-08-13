@@ -35,6 +35,11 @@ namespace OperationsOnData.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "End booking date")]
+        public DateTime? EndBookingDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Borrowing date")]
         public DateTime? BorrowingDate { get; set; }
 

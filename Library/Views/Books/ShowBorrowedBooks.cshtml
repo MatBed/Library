@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.BorrowingDate)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -36,6 +39,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BorrowingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
             </td>
         </tr>
     }

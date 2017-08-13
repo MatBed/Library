@@ -223,6 +223,9 @@
     <Compile Include="Models\Views\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BookedBookViewModel.cs" />
+    <Compile Include="ViewModels\BorrowedBookViewModel.cs" />
+    <Compile Include="ViewModels\ListOfBooksViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

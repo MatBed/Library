@@ -50,6 +50,7 @@ namespace OperationsOnData.Library_Operations
             var user = FindUserById(id);
             user.NumberOfBooks++;
             book.BookingDate = DateTime.Now.Date;
+            book.EndBookingDate = book.BookingDate.Value.AddDays(3);
             book.Status = Status.Booked;
         }
 
@@ -59,6 +60,9 @@ namespace OperationsOnData.Library_Operations
             user.NumberOfBooks--;
             book.BookingDate = null;
             book.Status = Status.Available;
+
+            //if(book.EndBookingDate > DateTime.Now.Date)
+            //    book.Status = Status.Available;
         }
 
         public void ChangeStatus(Book book, string id)
@@ -76,6 +80,7 @@ namespace OperationsOnData.Library_Operations
             {
                 book.BookingDate = null;
                 book.BorrowingDate = DateTime.Now.Date;
+                book.ReturnDate = book.BorrowingDate.Value.AddDays(180);
             }
 
             LibraryDb.Entry(book).State = System.Data.Entity.EntityState.Modified;

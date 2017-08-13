@@ -28,6 +28,9 @@
             @Html.DisplayNameFor(model => model.BookingDate)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.EndBookingDate)
+        </th>
+        <th>
             Function
         </th>
     </tr>
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BookingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndBookingDate)
         </td>
         <td>
             @if (item.Status == OperationsOnData.Models.Status.Booked)

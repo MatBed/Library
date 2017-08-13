@@ -46,9 +46,6 @@ namespace Library.Controllers
                 return View(foundBooks.OrderBy(o => o.Type));
 
             return View(foundBooks.OrderBy(o => o.Type));
-
-            //var books = libraryOperations.GetBooks();
-            //return View(books);
         }
 
         public ActionResult ShowBookedBooks()
