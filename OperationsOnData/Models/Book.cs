@@ -53,9 +53,9 @@ namespace OperationsOnData.Models
     }
 
     public enum Status
-    {
-        Available,
+    {        
         Booked,
+        Available,
         Borrowed
     }
 }
