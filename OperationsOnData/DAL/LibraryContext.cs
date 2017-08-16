@@ -11,7 +11,7 @@ namespace OperationsOnData.DAL
 {
     public class LibraryContext : IdentityDbContext, ILibraryContext
     {
-        public LibraryContext() : base("Library")
+        public LibraryContext() : base("LibraryConnection")
         {
 
         }
