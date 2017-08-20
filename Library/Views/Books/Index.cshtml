@@ -6,9 +6,11 @@
 
 @Html.Partial("_BooksMainPanelPartial")
 <br /><br /><br /><br /><br />
-<h2 style="text-align:center;">List of books</h2>
-<br />
-<div>
+
+
+<div class="wow bounceInLeft" data-wow-delay="0.2s">
+    <h2 style="text-align:center;">List of books</h2>
+    <br />
     <form style="color:black" id="search" method="get" , data-ajax="true" data-ajax-target="#booksList" data-ajax-update="#booksList">
         <input id="BooksSought" , name="BooksSought" placeholder="Title, author or type" style="width: 200px" />
         <input type="submit" value="Search" />
@@ -23,7 +25,7 @@
     </p>
 }
 
-<table class="table table-bordered table-responsive">
+<table class="table table-bordered table-responsive wow bounceInLeft" data-wow-delay="0.2s">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
