@@ -1,11 +1,24 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿ 
+<!-- Section: intro -->
+<section id="intro" class="intro row backgroundimg">
+    @Html.Partial("_IntroSectionPartial")
+</section>
+<!-- /Section: intro -->
 
+<!-- Section: services -->
+<section id="service" class="home-section text-center bg-gray">
+    @Html.Partial("_ServicesSectionPartial")
+</section>
+<!-- /Section: services -->
 
+<!-- Section: about -->
+<section id="about" class="home-section text-center">
+    @Html.Partial("_AboutSectionPartial")
+</section>
+<!-- /Section: about -->
 
-<center>
-    <h1><br />Welcome in library <br /><br /><br /></h1>
-</center>
-    
-
+ <!-- Section: contact -->
+@*<section id="contact" class="home-section text-center">
+        @Html.Partial("_ContactSectionPartial")
+    </section>*@
+<!-- /Section: contact -->

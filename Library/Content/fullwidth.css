@@ -11,3 +11,17 @@
     height: 94.8vh;
     width: 101%;
 }
+
+.backgroundcolor {
+    margin:1px;
+    background: linear-gradient(to right bottom, #b6ff00, #0094ff);
+}
+
+table tr td{
+    font-weight:700;
+}
+
+table tr th{
+    font-weight:900;
+    color:blue;
+}

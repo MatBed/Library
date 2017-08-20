@@ -36,16 +36,16 @@ namespace Library.Controllers
                 if (foundBooks.Count() == 0)
                 {
                     ViewBag.Error = true;
-                    return View(foundBooks.OrderBy(o => o.Type));
+                    return PartialView("_BooksList", foundBooks.OrderBy(o => o.Type));
                 }
             }
             else
                 foundBooks = libraryOperations.GetBooks();
 
             if (Request.IsAjaxRequest())
-                return View(foundBooks.OrderBy(o => o.Type));
+                return PartialView("_BooksList", foundBooks.OrderBy(o => o.Type));
 
-            return View(foundBooks.OrderBy(o => o.Type));
+            return PartialView("_BooksList", foundBooks.OrderBy(o => o.Type));
         }
 
         public ActionResult ShowBookedBooks()
