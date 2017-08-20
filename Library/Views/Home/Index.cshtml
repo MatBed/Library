@@ -1,4 +1,6 @@
-﻿ 
+﻿
+@Html.Partial("_HomeMainPanelPartial")
+
 <!-- Section: intro -->
 <section id="intro" class="intro row backgroundimg">
     @Html.Partial("_IntroSectionPartial")
@@ -18,7 +20,14 @@
 <!-- /Section: about -->
 
  <!-- Section: contact -->
-@*<section id="contact" class="home-section text-center">
+<section id="contact" class="home-section text-center">
         @Html.Partial("_ContactSectionPartial")
-    </section>*@
+</section>
 <!-- /Section: contact -->
+<center>
+    <div class="page-scroll">
+        <a href="#intro" class="btn btn-circle" style="color:black;">
+            <i class="fa fa-angle-double-up animated" style="color:black;"></i>
+        </a>
+    </div>
+</center>

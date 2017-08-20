@@ -334,6 +334,8 @@
     <Content Include="Views\Shared\_ServicesSectionPartial.cshtml" />
     <Content Include="Views\Shared\_AboutSectionPartial.cshtml" />
     <Content Include="Views\Shared\_ContactSectionPartial.cshtml" />
+    <Content Include="Views\Shared\_HomeMainPanelPartial.cshtml" />
+    <Content Include="Views\Shared\_BooksMainPanelPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

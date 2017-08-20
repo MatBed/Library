@@ -18,31 +18,6 @@
         <div id="load"></div>
     </div>
 
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            @*<div class="navbar-header page-scroll">
-                @Html.ActionLink("Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>*@
-
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#intro">Home</a></li>
-                    <li><a href="#service">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    @*<li><a href="#contact">Contact</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Example menu</a></li>
-                                <li><a href="#">Example menu</a></li>
-                                <li><a href="#">Example menu</a></li>
-                            </ul>
-                        </li>*@
-                </ul>
-            </div>
-        </div>
-    </nav>
-
         @RenderBody()
         <footer>
             <p>&copy; @DateTime.Now.Year - Mateusz Bedła</p>
@@ -51,6 +26,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/myScripts")
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

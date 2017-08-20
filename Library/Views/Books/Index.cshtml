@@ -4,14 +4,16 @@
     ViewBag.Title = "Index";
 }
 
+@Html.Partial("_BooksMainPanelPartial")
+<br /><br /><br /><br /><br />
 <h2 style="text-align:center;">List of books</h2>
 <br />
-<div style="text-align:center;">
+<div>
     <form style="color:black" id="search" method="get" , data-ajax="true" data-ajax-target="#booksList" data-ajax-update="#booksList">
         <input id="BooksSought" , name="BooksSought" placeholder="Title, author or type" style="width: 200px" />
         <input type="submit" value="Search" />
     </form>
-    <br /><br />
+    <br />
 </div>
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
