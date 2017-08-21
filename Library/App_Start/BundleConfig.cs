@@ -26,7 +26,7 @@ namespace Library
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/animate.min.css",
                       "~/Content/style.css",

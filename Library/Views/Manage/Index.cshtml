@@ -1,31 +1,28 @@
 ﻿@model Library.Models.IndexViewModel
-@{
-    ViewBag.Title = "Your Account";
-}
 
-<h2>@ViewBag.Title.</h2>
-
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    @Html.Partial("_BooksMainPanelPartial")
-    <br /><br /><br /><br /><br />
-    <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>E-mail:</dt>
-        <dd>@User.Identity.Name</dd>
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
+<div class="container body-content">
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div>
+        @Html.Partial("_BooksMainPanelPartial")
+        <br /><br /><br /><br /><br />
+        <h4>Change your account settings</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>E-mail:</dt>
+            <dd>@User.Identity.Name</dd>
+            <dt>Password:</dt>
+            <dd>
+                [
+                @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>                
-    </dl>
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }
+                ]
+            </dd>
+        </dl>
+    </div>
 </div>

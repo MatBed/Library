@@ -1,4 +1,4 @@
-/* ==== Google font ==== */
+ ==== Google font ==== 
 @import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Montserrat:700|Merriweather:400italic');
 
 
@@ -162,7 +162,7 @@ a:focus {
 }
 
 
-/* loader */
+ loader 
 #preloader {
     background: #ffffff;
     bottom: 0;
@@ -240,12 +240,12 @@ a:focus {
   animation: shadowSpin 1s ease-in-out infinite;
 }
 
-/* misc */
+ misc 
 hr {
   margin-top: 10px;
 }
 
-/* margins */
+ margins 
 .marginbot-0{margin-bottom:0 !important;}
 .marginbot-10{margin-bottom:10px !important;}
 .marginbot-20{margin-bottom:20px !important;}
@@ -253,9 +253,9 @@ hr {
 .marginbot-40{margin-bottom:40px !important;}
 .marginbot-50{margin-bottom:50px !important;}
 
-/* ===========================
+ ===========================
 --- General sections
-============================ */
+============================ 
 
 .home-section {
     padding-top: 110px;
@@ -274,7 +274,7 @@ hr {
 }
 
 
-/* --- section bg var --- */
+ --- section bg var --- 
 
 .bg-white {
 	background: #fff;
@@ -289,7 +289,7 @@ hr {
 	background: #575757;
 }
 
-/* --- section color var --- */
+ --- section color var --- 
 
 .text-light {
 	color: #fff;
@@ -297,9 +297,9 @@ hr {
 
 
 
-/* ===========================
+ ===========================
 --- Intro
-============================ */
+============================ 
 
 .intro {
 	width:100%;
@@ -351,9 +351,9 @@ hr {
 }
 
 
-/* ===========================
+ ===========================
 --- About
-============================ */
+============================ 
 
 .boxed-grey {
 	background: #f9f9f9;
@@ -421,9 +421,9 @@ hr {
 .team-social .social-vimeo a:hover{background: #71c6f3;}
 
 
-/* ===========================
+ ===========================
 --- Services
-============================ */
+============================ 
 
 .service-icon {
 	margin-bottom: 20px;
@@ -431,9 +431,9 @@ hr {
 
 
 
-/* ===========================
+ ===========================
 --- Contact
-============================ */
+============================ 
 
 form#contact-form .form-group label {
 	text-align: left !important;
@@ -514,9 +514,9 @@ form#contact-form input:focus,form#contact-form select:focus,form#contact-form t
 
 
 
-/* ===========================
+ ===========================
 --- Footer
-============================ */
+============================ 
 
 footer {
 	text-align: left;
@@ -528,9 +528,9 @@ footer p {
 	color: black;
 }
 
-/* ==========================
+ ==========================
 Parallax
-============================= */
+============================= 
 
 #parallax1{	
 	background-image: url(../img/parallax/1.jpg);
@@ -567,9 +567,9 @@ Parallax
 }
 
 
-/* ===========================
+ ===========================
 --- Elements
-============================ */
+============================ 
 
 .btn {
 	border-radius: 0;
@@ -713,7 +713,7 @@ Parallax
 }
 
 
-/* Media queries */
+ Media queries 
 
 @media(min-width:767px) {
 

@@ -7,90 +7,91 @@
 @Html.Partial("_BooksMainPanelPartial")
 <br /><br /><br /><br /><br />
 
+<div class="container body-content">
+    <div class="wow bounceInLeft" data-wow-delay="0.2s">
+        <h2 style="text-align:center;">List of books</h2>
+        <br />
+        <form style="color:black" id="search" method="get" , data-ajax="true" data-ajax-target="#booksList" data-ajax-update="#booksList">
+            <input id="BooksSought" , name="BooksSought" placeholder="Title, author or type" style="width: 200px" />
+            <input type="submit" value="Search" />
+        </form>
+        <br />
+    </div>
 
-<div class="wow bounceInLeft" data-wow-delay="0.2s">
-    <h2 style="text-align:center;">List of books</h2>
-    <br />
-    <form style="color:black" id="search" method="get" , data-ajax="true" data-ajax-target="#booksList" data-ajax-update="#booksList">
-        <input id="BooksSought" , name="BooksSought" placeholder="Title, author or type" style="width: 200px" />
-        <input type="submit" value="Search" />
-    </form>
-    <br />
-</div>
-
-@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-{
-    <p>
-        @Html.ActionLink("Add new book", "Create", null, new { @class = "btn btn-primary" })
-    </p>
-}
-
-<table class="table table-bordered table-responsive wow bounceInLeft" data-wow-delay="0.2s">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfPages)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>Action</th>
-    </tr>
-
-    @foreach (var item in Model)
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfPages)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+        <p>
+            @Html.ActionLink("Add new book", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    }
 
-            <td>
-                @if (item.Status == OperationsOnData.Models.Status.Available)
+    <table class="table table-responsive table-striped wow bounceInLeft" data-wow-delay="0.2s">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfPages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfPages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+                <td>
+                    @if (item.Status == OperationsOnData.Models.Status.Available)
                 {
                     if (User.Identity.IsAuthenticated)
                     {
                         using (Html.BeginForm("Reservation", "Books", new { id = item.BookId }, FormMethod.Post))
                         {
-                            @Html.Hidden("BookId", item.BookId)
-                            <input type="submit" value="Reserve" onclick="return confirm('Are you sure?')" class="btn btn-success" />
+                                @Html.Hidden("BookId", item.BookId)
+                                <input type="submit" value="Reserve" onclick="return confirm('Are you sure?')" class="btn btn-success" />
+                            }
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Reserve", "Login", "Account", null, new { @class = "btn btn-success" })
                         }
                     }
-                    else
-                    {
-                        @Html.ActionLink("Reserve", "Login", "Account", null, new { @class = "btn btn-success" })
-                    }
-                }
 
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") && item.Status == OperationsOnData.Models.Status.Available)
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") && item.Status == OperationsOnData.Models.Status.Available)
                 {
                     using (Html.BeginForm("Delete", "Books", new { id = item.BookId }, FormMethod.Post))
                     {
-                        @Html.Hidden("BookId", item.BookId)
-                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want delete this book?')" class="btn btn-danger" />
+                            @Html.Hidden("BookId", item.BookId)
+                            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want delete this book?')" class="btn btn-danger" />
+                        }
                     }
-                }
-            </td>
-        </tr>
-    }
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
