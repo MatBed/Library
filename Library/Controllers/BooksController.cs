@@ -22,30 +22,15 @@ namespace Library.Controllers
             this.libraryOperations = libraryOperations;
         }
 
-        public ActionResult Index(string BooksSought)
+        public ActionResult Index()
         {
-            IEnumerable<Book> foundBooks;
+            return View();
+        }
 
-            if (BooksSought == "")
-                BooksSought = null;
-
-            if (BooksSought != null)
-            {
-                foundBooks = libraryOperations.GetBooks().Where(s => s.Title == BooksSought || s.Author == BooksSought || s.Type == BooksSought);
-
-                if (foundBooks.Count() == 0)
-                {
-                    ViewBag.Error = true;
-                    return View(foundBooks.OrderBy(o => o.Type));
-                }
-            }
-            else
-                foundBooks = libraryOperations.GetBooks();
-
-            if (Request.IsAjaxRequest())
-                return View(foundBooks.OrderBy(o => o.Type));
-
-            return View(foundBooks.OrderBy(o => o.Type));
+        public ActionResult GetBooks()
+        {
+            var books = libraryOperations.GetBooks();
+            return Json(new { data = books }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ShowBookedBooks()
@@ -82,8 +67,6 @@ namespace Library.Controllers
             }
             else
                 return View(book);
-
-            //return View("Index");
         }
 
         [HttpPost]
@@ -112,7 +95,7 @@ namespace Library.Controllers
             try
             {
                 libraryOperations.Booking(book, userId);
-                book.UserId = User.Identity.GetUserId();
+                book.UserId = userId;
                 libraryOperations.SaveChanges();                
             }
             catch
@@ -120,7 +103,6 @@ namespace Library.Controllers
                 return View("Index");
             }
 
-            TempData["Message"] = "Resevation successful!";
             return RedirectToAction("Index");
         }
 
@@ -142,7 +124,6 @@ namespace Library.Controllers
                 return View("Index");
             }
 
-            TempData["Message"] = "Operation successful!";
             return RedirectToAction("ShowBookedBooks");
         }
 

@@ -4,94 +4,195 @@
     ViewBag.Title = "Index";
 }
 
-@Html.Partial("_BooksMainPanelPartial")
-<br /><br /><br /><br /><br />
+<link href="~/Content/body.css" rel="stylesheet" />
 
-<div class="container body-content">
-    <div class="wow bounceInLeft" data-wow-delay="0.2s">
-        <h2 style="text-align:center;">List of books</h2>
-        <br />
-        <form style="color:black" id="search" method="get" , data-ajax="true" data-ajax-target="#booksList" data-ajax-update="#booksList">
-            <input id="BooksSought" , name="BooksSought" placeholder="Title, author or type" style="width: 200px" />
-            <input type="submit" value="Search" />
-        </form>
-        <br />
+    @Html.Partial("_BooksMainPanelPartial")
+    <br /><br /><br /><br /><br />
+    <div style="width:90%; margin:0 auto;" class="tablecontainer" >
+        <table id="myTable" style="background-color:blueviolet;" class="table table-bordered table-responsive table-striped wow bounceInLeft" data-wow-delay="0.2s">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Pages</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
     </div>
-
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {
-        <p>
-            @Html.ActionLink("Add new book", "Create", null, new { @class = "btn btn-primary" })
-        </p>
-    }
-
-    <table class="table table-responsive table-striped wow bounceInLeft" data-wow-delay="0.2s">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfPages)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>Action</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfPages)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-
-                <td>
-                    @if (item.Status == OperationsOnData.Models.Status.Available)
-                {
-                    if (User.Identity.IsAuthenticated)
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var oTable = $('#myTable').DataTable({
+                "ajax": {
+                    "url": '/books/GetBooks',
+                    "type": "get",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Title", "autoWidth": true },
+                    { "data": "Author", "autoWidth": true },
+                    { "data": "Type", "autoWidth": true },
+                    { "data": "NumberOfPages", "autoWidth": true },
+                    { "data": "Status", "autoWidth": true },
                     {
-                        using (Html.BeginForm("Reservation", "Books", new { id = item.BookId }, FormMethod.Post))
-                        {
-                                @Html.Hidden("BookId", item.BookId)
-                                <input type="submit" value="Reserve" onclick="return confirm('Are you sure?')" class="btn btn-success" />
+                        "data": "BookId", "width": "50px", "render": function (data) {
+                            return '<a class="popup btn btn-success" href="/home/delete/' + data + '">Reserve</a>';
+                        }
+                    }
+                ]
+            })
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
+            })
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator');
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+
+                });
+
+                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                    .html($pageContent)
+                    .dialog({
+                        draggable: false,
+                        autoOpen: false,
+                        resizable: false,
+                        model: true,
+                        title: 'Popup Dialog',
+                        height: 550,
+                        width: 600,
+                        close: function () {
+                            $dialog.dialog('destroy').remove();
+                        }
+                    })
+
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
                             }
                         }
-                        else
-                        {
-                            @Html.ActionLink("Reserve", "Login", "Account", null, new { @class = "btn btn-success" })
-                        }
-                    }
+                    })
 
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") && item.Status == OperationsOnData.Models.Status.Available)
-                {
-                    using (Html.BeginForm("Delete", "Books", new { id = item.BookId }, FormMethod.Post))
-                    {
-                            @Html.Hidden("BookId", item.BookId)
-                            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want delete this book?')" class="btn btn-danger" />
-                        }
-                    }
-                </td>
-            </tr>
+                    e.preventDefault();
+                })
+                $dialog.dialog('open');
+            }
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+
+@*@Html.Partial("_BooksMainPanelPartial")
+    <br /><br /><br /><br /><br />
+
+    <div class="container body-content">
+        <div class="wow bounceInLeft" data-wow-delay="0.2s">
+            <h2 style="text-align:center;">List of books</h2>
+            <br />
+            <form style="color:black" id="search" method="get" , data-ajax="true" data-ajax-target="#booksList" data-ajax-update="#booksList">
+                <input id="BooksSought" , name="BooksSought" placeholder="Title, author or type" style="width: 200px" />
+                <input type="submit" value="Search" />
+            </form>
+            <br />
+        </div>
+
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <p>
+                @Html.ActionLink("Add new book", "Create", null, new { @class = "btn btn-primary" })
+            </p>
         }
 
-    </table>
-</div>
+        <table id="example" class="table table-responsive table-striped wow bounceInLeft" data-wow-delay="0.2s">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Author)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumberOfPages)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfPages)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+
+                        <td>
+                            @if (item.Status == OperationsOnData.Models.Status.Available)
+                            {
+                                if (User.Identity.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Reservation", "Books", new { id = item.BookId }, FormMethod.Post))
+                                    {
+                                        @Html.Hidden("BookId", item.BookId)
+                                        <input type="submit" value="Reserve" onclick="return confirm('Are you sure?')" class="btn btn-success" />
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Reserve", "Login", "Account", null, new { @class = "btn btn-success" })
+                                }
+                            }
+
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") && item.Status == OperationsOnData.Models.Status.Available)
+                            {
+                                using (Html.BeginForm("Delete", "Books", new { id = item.BookId }, FormMethod.Post))
+                                {
+                                    @Html.Hidden("BookId", item.BookId)
+                                    <input type="submit" value="Delete" onclick="return confirm('Are you sure you want delete this book?')" class="btn btn-danger" />
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@

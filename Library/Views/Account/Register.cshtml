@@ -1,5 +1,7 @@
 ﻿@model Library.Models.RegisterViewModel
 
+<link href="~/Content/body.css" rel="stylesheet" />
+
 <div class="container body-content">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {

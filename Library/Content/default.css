@@ -26,13 +26,3 @@ a,.tp-caption a.btn:hover {
 form#contact-form input:focus, form#contact-form select:focus, form#contact-form textarea:focus {
     border-color: #635715;
 }
-
-footer {
-    background-color: #fff;
-}
-
-.btn-skin {
-    color: #fff;
-    background-color: #fff;
-    border-color: #fff;
-}

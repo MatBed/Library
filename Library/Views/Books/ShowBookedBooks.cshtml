@@ -4,12 +4,7 @@
     ViewBag.Title = "ShowBookedBooks";
 }
 
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-success" role="alert">
-        @TempData["Message"]
-    </div>
-}
+<link href="~/Content/body.css" rel="stylesheet" />
 
 @Html.Partial("_BooksMainPanelPartial")
 <br /><br /><br /><br /><br />
