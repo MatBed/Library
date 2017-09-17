@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Library.ViewModels
 {
@@ -13,13 +15,14 @@ namespace Library.ViewModels
         public string Author { get; set; }
         public string Type { get; set; }        
         public int NumberOfPages { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; }
     }
 
     public enum Status
-    {
-        Available,
-        Booked,
-        Borrowed
+    {        
+        Booked = 0,
+        Available = 1,
+        Borrowed = 2
     }
 }

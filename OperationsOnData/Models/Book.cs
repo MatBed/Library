@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace OperationsOnData.Models
@@ -11,21 +14,22 @@ namespace OperationsOnData.Models
         public int BookId { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
-        [MaxLength(40)]
+        [MaxLength(140)]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
-        [MaxLength(40)]
+        [MaxLength(80)]
         public string Author { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
-        [MaxLength(25)]
+        [MaxLength(50)]
         public string Type { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
         [Display(Name = "Pages")]
         public int NumberOfPages { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; }
 
         [DataType(DataType.Date)]
@@ -53,9 +57,14 @@ namespace OperationsOnData.Models
     }
 
     public enum Status
-    {        
-        Booked,
-        Available,
-        Borrowed
+    {
+        [Display(Name = @"Booked")]
+        Booked = 0,
+
+        [Display(Name = @"Available")]
+        Available = 1,
+
+        [Display(Name = @"Borrowed")]
+        Borrowed = 2
     }
 }

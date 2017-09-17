@@ -25,6 +25,14 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script>
+        function RenderHTMLActionButtons(id)
+        {
+            return `<form action="@Html.Raw(HttpUtility.UrlDecode(Url.Action("Reservation", "Books", new { id = "{{id}}" })))" method="post">
+                        <input type="submit" value="Reserve" onclick="return confirm('Are you sure?')" class="btn btn-success">
+                    </form>`
+                    .replace(/{{id}}/g, id);
+        }
+
         $(document).ready(function () {
             var oTable = $('#myTable').DataTable({
                 "ajax": {
@@ -39,11 +47,15 @@
                     { "data": "NumberOfPages", "autoWidth": true },
                     { "data": "Status", "autoWidth": true },
                     {
-                        "data": "BookId", "width": "50px", "render": function (data) {
-                            return '<a class="popup btn btn-success" href="/home/delete/' + data + '">Reserve</a>';
+                        "title": '',
+                        "data": null,
+                        "render": function (data, type, row) {
+
+                            return RenderHTMLActionButtons(data['BookId']);
                         }
                     }
                 ]
+
             })
             $('.tablecontainer').on('click', 'a.popup', function (e) {
                 e.preventDefault();

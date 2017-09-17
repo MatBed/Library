@@ -10,6 +10,7 @@ using OperationsOnData.DAL;
 using OperationsOnData.Models;
 using OperationsOnData.Interfaces;
 using Microsoft.AspNet.Identity;
+using Library.ViewModels;
 
 namespace Library.Controllers
 {
@@ -36,14 +37,14 @@ namespace Library.Controllers
         public ActionResult ShowBookedBooks()
         {
             var userId = User.Identity.GetUserId();
-            var books = libraryOperations.GetBooks().Where(m => m.Status == Status.Booked && m.UserId == userId);
+            var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Booked && m.UserId == userId);
             return View(books);
         }
 
         public ActionResult ShowBorrowedBooks()
         {
             var userId = User.Identity.GetUserId();
-            var books = libraryOperations.GetBooks().Where(m => m.Status == Status.Borrowed && m.UserId == userId);
+            var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Borrowed && m.UserId == userId);
             return View(books);
         }
 
@@ -60,7 +61,7 @@ namespace Library.Controllers
         {
             if (ModelState.IsValid)
             {
-                book.Status = Status.Available;
+                book.Status = OperationsOnData.Models.Status.Available;
                 libraryOperations.AddBook(book);
                 libraryOperations.SaveChanges();
                 return RedirectToAction("Index");
