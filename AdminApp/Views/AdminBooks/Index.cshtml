@@ -1,0 +1,70 @@
+﻿@model IEnumerable<OperationsOnData.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br /><br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>
+            <h3>All Books</h3>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div style="width:90%; margin:0 auto;">
+            <table id="myTable" class="table table-bordered table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Type</th>
+                        <th>Pages</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script>
+        function RenderHTMLActionButtons(id)
+        {
+            return `<form action="@Html.Raw(HttpUtility.UrlDecode(Url.Action("Delete", "AdminBooks", new { id = "{{id}}" })))" method="post">
+                        <input type="submit" value="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger">
+                    </form>`
+                    .replace(/{{id}}/g, id);
+        }
+
+        $(document).ready(function () {
+            var oTable = $('#myTable').DataTable({
+                "ajax": {
+                    "url": '/AdminBooks/GetBooks',
+                    "type": "get",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Title", "autoWidth": true },
+                    { "data": "Author", "autoWidth": true },
+                    { "data": "Type", "autoWidth": true },
+                    { "data": "NumberOfPages", "autoWidth": true },
+                    { "data": "Status", "autoWidth": true },
+                    {
+                        "title": '',
+                        "data": null,
+                        "render": function (data, type, row) {
+
+                            return RenderHTMLActionButtons(data['BookId']);
+                        }
+                    }
+                ]
+
+            })
+
+
+        })
+</script>
