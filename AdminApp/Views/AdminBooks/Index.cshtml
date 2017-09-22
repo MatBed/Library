@@ -12,6 +12,9 @@
         </span>
     </div>
     <div class="panel-body">
+        <div>
+            <p>@Html.ActionLink("Add book to database", "Create", null, new { @class = "btn btn-primary" })</p>
+        </div>
         <div style="width:90%; margin:0 auto;">
             <table id="myTable" class="table table-bordered table-responsive table-striped">
                 <thead>
@@ -34,37 +37,46 @@
 <script>
         function RenderHTMLActionButtons(id)
         {
-            return `<form action="@Html.Raw(HttpUtility.UrlDecode(Url.Action("Delete", "AdminBooks", new { id = "{{id}}" })))" method="post">
+            return `<center><a class="btn btn-primary" href= "@Html.Raw(HttpUtility.UrlDecode(Url.Action("Edit", "AdminBooks", new { id = "{{id}}" })))">
+                        Edit
+                    </a> | 
+                    <form action="@Html.Raw(HttpUtility.UrlDecode(Url.Action("Delete", "AdminBooks", new { id = "{{id}}" })))" method="post">
                         <input type="submit" value="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger">
-                    </form>`
-                    .replace(/{{id}}/g, id);
-        }
+                    </form></center>`
+            .replace(/{{id}}/g, id);
+    }
 
-        $(document).ready(function () {
-            var oTable = $('#myTable').DataTable({
-                "ajax": {
-                    "url": '/AdminBooks/GetBooks',
-                    "type": "get",
-                    "datatype": "json"
-                },
-                "columns": [
-                    { "data": "Title", "autoWidth": true },
-                    { "data": "Author", "autoWidth": true },
-                    { "data": "Type", "autoWidth": true },
-                    { "data": "NumberOfPages", "autoWidth": true },
-                    { "data": "Status", "autoWidth": true },
-                    {
-                        "title": '',
-                        "data": null,
-                        "render": function (data, type, row) {
+    $(document).ready(function () {
+        var oTable = $('#myTable').DataTable({
+            "ajax": {
+                "url": '/AdminBooks/GetBooks',
+                "type": "get",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "Title", "autoWidth": true },
+                { "data": "Author", "autoWidth": true },
+                { "data": "Type", "autoWidth": true },
+                { "data": "NumberOfPages", "autoWidth": true },
+                { "data": "Status", "autoWidth": true },
+                {
+                    "title": '',
+                    "data": null,
+                    "render": function (data, type, row) {
 
-                            return RenderHTMLActionButtons(data['BookId']);
-                        }
+                        return RenderHTMLActionButtons(data['BookId']);
                     }
-                ]
-
-            })
-
+                }
+            ]
 
         })
+
+
+    })
 </script>
+
+<style>
+    form{
+        display: inline-block;
+    }
+</style>
