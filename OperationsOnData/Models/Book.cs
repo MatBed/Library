@@ -58,11 +58,11 @@ namespace OperationsOnData.Models
 
     public enum Status
     {
-        [Display(Name = @"Booked")]
-        Booked = 0,
-
         [Display(Name = @"Available")]
         Available = 1,
+
+        [Display(Name = @"Booked")]
+        Booked = 0,
 
         [Display(Name = @"Borrowed")]
         Borrowed = 2

@@ -3,6 +3,7 @@ using OperationsOnData.Models;
 using OperationsOnData.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -25,6 +26,8 @@ namespace OperationsOnData.Library_Operations
 
         public void AddBook(Book book)
         {
+            var maxId = GetBooks().Max(m => m.BookId);
+            book.BookId = maxId + 1;
             LibraryDb.Books.Add(book);
         }
 
@@ -117,6 +120,11 @@ namespace OperationsOnData.Library_Operations
             booksAndUserViewModel.Books = allBooks.Where(m => m.UserId == id);
 
             return booksAndUserViewModel;
+        }
+
+        public void EditBook(Book book)
+        {
+            LibraryDb.Entry(book).State = EntityState.Modified;
         }
     }
 }
