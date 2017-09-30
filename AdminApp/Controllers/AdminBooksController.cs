@@ -20,7 +20,6 @@ namespace AdminApp.Controllers
 
         public ActionResult Index()
         {
-            //var books = libraryOperations.GetBooks();
             return View();
         }
 

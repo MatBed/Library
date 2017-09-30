@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace OperationsOnData.Models
 {
@@ -53,6 +54,8 @@ namespace OperationsOnData.Models
         public DateTime? ReturnDate { get; set; }
 
         public string UserId { get; set; }
+
+        [ScriptIgnore]
         public User User { get; set; }
     }
 

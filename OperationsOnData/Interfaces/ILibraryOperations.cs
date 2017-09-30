@@ -18,7 +18,7 @@ namespace OperationsOnData.Interfaces
         Book FindById(int id);
         void Booking(Book book, string id);
         void CancleBooking(Book book, string id);
-        void ChangeStatus(Book book, string id);
+        void ChangeStatus(Book book);
 
         IQueryable<User> GetUsers();
         void RemoveUser(string id);

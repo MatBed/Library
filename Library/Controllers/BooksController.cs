@@ -134,23 +134,6 @@ namespace Library.Controllers
             return View(book);
         }
 
-        [HttpPost]
-        public ActionResult ChangeStatus(Book book)
-        {
-            var userId = book.UserId;
-            try
-            {
-                libraryOperations.ChangeStatus(book, userId);
-                libraryOperations.SaveChanges();
-            }
-            catch
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            
-            return RedirectToAction("Details", "User", new { id = userId });
-        }
-
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)

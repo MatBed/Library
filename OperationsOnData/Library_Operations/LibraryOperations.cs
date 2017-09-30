@@ -68,18 +68,26 @@ namespace OperationsOnData.Library_Operations
             //    book.Status = Status.Available;
         }
 
-        public void ChangeStatus(Book book, string id)
+        public void ChangeStatus(Book book)
         {
             if (book.Status == Status.Available)
             {
-                book.UserId = null;
+                var user = FindUserById(book.UserId);
+                user.NumberOfBooks--;
                 book.BookingDate = null;
                 book.BorrowingDate = null;
-                var user = FindUserById(id);
-                user.NumberOfBooks--;
-            }                
+                book.UserId = null;
+            }
 
-            if(book.Status == Status.Borrowed)
+            if (book.Status == Status.Booked)
+            {
+                var user = FindUserById(book.UserId);
+                book.BookingDate = DateTime.Now.Date;
+                book.BorrowingDate = null;
+                book.ReturnDate = null;
+            }
+
+            if (book.Status == Status.Borrowed)
             {
                 book.BookingDate = null;
                 book.BorrowingDate = DateTime.Now.Date;
