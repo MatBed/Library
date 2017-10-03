@@ -17,10 +17,10 @@ namespace OperationsOnData.Models
             this.Books = new HashSet<Book>();
         }
 
-        [Required(ErrorMessage = "This field is required!")]
+        [Required(ErrorMessage = "Name is required!")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
+        [Required(ErrorMessage = "Second Name is required!")]
         [Display(Name = "Second Name")]
         public string SecondName { get; set; }
 

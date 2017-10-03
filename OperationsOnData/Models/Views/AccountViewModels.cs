@@ -64,19 +64,19 @@ namespace Library.Models
         
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "This field is required!")]
+        [Required(ErrorMessage = "Name is required!")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
+        [Required(ErrorMessage = "Second Name is required!")]
         [Display(Name = "Second Name")]
         public string SecondName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email is required!")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required!")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
