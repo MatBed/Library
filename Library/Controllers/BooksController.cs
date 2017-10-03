@@ -34,6 +34,7 @@ namespace Library.Controllers
             return Json(new { data = books }, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public ActionResult ShowBookedBooks()
         {
             var userId = User.Identity.GetUserId();
@@ -41,49 +42,12 @@ namespace Library.Controllers
             return View(books);
         }
 
+        [Authorize]
         public ActionResult ShowBorrowedBooks()
         {
             var userId = User.Identity.GetUserId();
             var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Borrowed && m.UserId == userId);
             return View(books);
-        }
-
-        [Authorize]
-        public ActionResult Create()
-        {
-            return View("Create");
-        }
-
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,Author,Type,NumberOfPages,Status")] Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                book.Status = OperationsOnData.Models.Status.Available;
-                libraryOperations.AddBook(book);
-                libraryOperations.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-                return View(book);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult Delete(int id)
-        {
-            try
-            {
-                libraryOperations.RemoveBook(id);
-                libraryOperations.SaveChanges();                
-            }
-            catch
-            {
-                return View("Index");
-            }
-            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -126,12 +90,6 @@ namespace Library.Controllers
             }
 
             return RedirectToAction("ShowBookedBooks");
-        }
-
-        public ActionResult ChangeStatus(int id)
-        {
-            var book = libraryOperations.FindById(id);
-            return View(book);
         }
 
         //protected override void Dispose(bool disposing)

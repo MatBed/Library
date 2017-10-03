@@ -217,7 +217,6 @@
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -625,14 +624,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Books\Create.cshtml" />
-    <Content Include="Views\Books\Delete.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Books\ShowBookedBooks.cshtml" />
     <Content Include="Views\Books\ShowBorrowedBooks.cshtml" />
-    <Content Include="Views\User\ShowUsers.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\Books\ChangeStatus.cshtml" />
     <Content Include="Views\Shared\_IntroSectionPartial.cshtml" />
     <Content Include="Views\Shared\_ServicesSectionPartial.cshtml" />
     <Content Include="Views\Shared\_AboutSectionPartial.cshtml" />
