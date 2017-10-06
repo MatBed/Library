@@ -30,7 +30,7 @@
             return `<form action="@Html.Raw(HttpUtility.UrlDecode(Url.Action("Reservation", "Books", new { id = "{{id}}" })))" method="post">
                         <input type="submit" value="Reserve" onclick="return confirm('Are you sure?')" class="btn btn-success">
                     </form>`
-                    .replace(/{{id}}/g, id);
+                .replace(/{{id}}/g, id);
         }
 
         $(document).ready(function () {
@@ -50,8 +50,14 @@
                         "title": '',
                         "data": null,
                         "render": function (data, type, row) {
-
-                            return RenderHTMLActionButtons(data['BookId']);
+                            if (data['Status'] == 1)
+                            {
+                                return RenderHTMLActionButtons(data['BookId']);
+                            }
+                            else
+                            {
+                                return '';
+                            }
                         }
                     }
                 ]
