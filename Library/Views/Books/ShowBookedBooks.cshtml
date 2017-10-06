@@ -10,60 +10,67 @@
 <br /><br /><br /><br /><br />
 
 <div class="container body-content">
-    <h2 style="text-align:center;">Your booked books</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span>
+                <h3>Your booked books</h3>
+            </span>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-responsive table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Author)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookingDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndBookingDate)
+                    </th>
+                    <th>
+                        Function
+                    </th>
+                </tr>
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndBookingDate)
-            </th>
-            <th>
-                Function
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndBookingDate)
-                </td>
-                <td>
-                    @if (item.Status == OperationsOnData.Models.Status.Booked)
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndBookingDate)
+                        </td>
+                        <td>
+                            @if (item.Status == OperationsOnData.Models.Status.Booked)
                 {
                     using (Html.BeginForm("CancleReservation", "Books", new { id = item.BookId }, FormMethod.Post))
                     {
-                            @Html.Hidden("BookId", item.BookId)
-                            <input type="submit" value="Cancel" onclick="return confirm('Are you sure?')" class="btn btn-success" />
-                        }
-                    }
-                </td>
-            </tr>
-        }
+                                    @Html.Hidden("BookId", item.BookId)
+                                    <input type="submit" value="Cancel" onclick="return confirm('Are you sure?')" class="btn btn-success" />
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
 
-    </table>
+            </table>
+        </div>
+    </div>
 </div>

@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace Library.ViewModels
 {
@@ -20,9 +21,12 @@ namespace Library.ViewModels
     }
 
     public enum Status
-    {        
+    {
+        [EnumMember(Value = "Booked")]
         Booked = 0,
+        [EnumMember(Value = "Available")]
         Available = 1,
+        [EnumMember(Value = "Borrowed")]
         Borrowed = 2
     }
 }

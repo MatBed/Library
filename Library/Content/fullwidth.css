@@ -26,11 +26,6 @@
     background: linear-gradient(to right bottom, #b6ff00, #0094ff);
 }
 
-table tr td{
-    font-weight:700;
-}
-
 table tr th{
     font-weight:900;
-    color:blue;
 }

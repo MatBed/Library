@@ -30,7 +30,6 @@ namespace OperationsOnData.Models
         [Display(Name = "Pages")]
         public int NumberOfPages { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; }
 
         [DataType(DataType.Date)]
@@ -61,13 +60,13 @@ namespace OperationsOnData.Models
 
     public enum Status
     {
-        [Display(Name = @"Available")]
+        [EnumMember(Value = "Available")]
         Available = 1,
 
-        [Display(Name = @"Booked")]
+        [EnumMember(Value = "Booked")]
         Booked = 0,
 
-        [Display(Name = @"Borrowed")]
+        [EnumMember(Value = "Borrowed")]
         Borrowed = 2
     }
 }
