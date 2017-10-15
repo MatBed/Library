@@ -62,10 +62,8 @@ namespace OperationsOnData.Library_Operations
             var user = FindUserById(id);
             user.NumberOfBooks--;
             book.BookingDate = null;
+            book.EndBookingDate = null;
             book.Status = Status.Available;
-
-            //if(book.EndBookingDate > DateTime.Now.Date)
-            //    book.Status = Status.Available;
         }
 
         public void ChangeStatus(Book book)
@@ -74,6 +72,8 @@ namespace OperationsOnData.Library_Operations
             {
                 var user = FindUserById(book.UserId);
                 user.NumberOfBooks--;
+                book.EndBookingDate = null;
+                book.ReturnDate = null;
                 book.BookingDate = null;
                 book.BorrowingDate = null;
                 book.UserId = null;
