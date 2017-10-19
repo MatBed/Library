@@ -31,7 +31,17 @@ namespace Library.Controllers
         public ActionResult GetBooks()
         {
             var books = libraryOperations.GetBooks();
-            return Json(new { data = books }, JsonRequestBehavior.AllowGet);
+            var booksVM = from book in books
+                          select new ListOfBooksViewModel
+                          {
+                              Title = book.Title,
+                              Type = book.Type,
+                              Status = (ViewModels.Status)book.Status,
+                              Author = book.Author,
+                              NumberOfPages = book.NumberOfPages,
+                              BookId = book.BookId
+                          };
+            return Json(new { data = booksVM }, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize]
@@ -39,7 +49,20 @@ namespace Library.Controllers
         {
             var userId = User.Identity.GetUserId();
             var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Booked && m.UserId == userId);
-            return View(books);
+            var booksVM = from book in books
+                          select new BookedBookViewModel
+                          {
+                               BookId = book.BookId,
+                               Author = book.Author,
+                               Title = book.Title,
+                               Status = (ViewModels.Status)book.Status,
+                               Type = book.Type,
+                               NumberOfPages = book.NumberOfPages,
+                               BookingDate = book.BookingDate,
+                               EndOfBookingDate = book.EndBookingDate
+                          };
+                
+            return View(booksVM);
         }
 
         [Authorize]
@@ -47,7 +70,18 @@ namespace Library.Controllers
         {
             var userId = User.Identity.GetUserId();
             var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Borrowed && m.UserId == userId);
-            return View(books);
+            var booksVM = from book in books
+                          select new BorrowedBookViewModel
+                          {
+                              Title = book.Title,
+                              Author = book.Author,
+                              Status = (ViewModels.Status)book.Status,
+                              Type = book.Type,
+                              NumberOfPages = book.NumberOfPages,
+                              BorrowingDate = book.BorrowingDate,
+                              ReturnDate = book.ReturnDate
+                          };
+            return View(booksVM);
         }
 
         [HttpPost]
@@ -61,7 +95,7 @@ namespace Library.Controllers
             {
                 libraryOperations.Booking(book, userId);
                 book.UserId = userId;
-                libraryOperations.SaveChanges();                
+                libraryOperations.SaveChanges();
             }
             catch
             {

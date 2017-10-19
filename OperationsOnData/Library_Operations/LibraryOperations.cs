@@ -134,5 +134,14 @@ namespace OperationsOnData.Library_Operations
         {
             LibraryDb.Entry(book).State = EntityState.Modified;
         }
+
+        public void ResetEndBookingDate()
+        {
+            var books = GetBooks();
+            var booksWithWrongDate = books.Where(m => m.EndBookingDate > DateTime.Now);
+
+            foreach (var item in booksWithWrongDate)
+                item.EndBookingDate = null;
+        }
     }
 }

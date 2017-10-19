@@ -1,4 +1,5 @@
-﻿@model IEnumerable<OperationsOnData.Models.Book>
+﻿@model IEnumerable<Library.ViewModels.BookedBookViewModel>
+@using Library.ViewModels;
 
 @{
     ViewBag.Title = "ShowBookedBooks";
@@ -32,7 +33,7 @@
                         @Html.DisplayNameFor(model => model.BookingDate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.EndBookingDate)
+                        @Html.DisplayNameFor(model => model.EndOfBookingDate)
                     </th>
                     <th>
                         Function
@@ -55,13 +56,13 @@
                             @Html.DisplayFor(modelItem => item.BookingDate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EndBookingDate)
+                            @Html.DisplayFor(modelItem => item.EndOfBookingDate)
                         </td>
                         <td>
-                            @if (item.Status == OperationsOnData.Models.Status.Booked)
-                {
-                    using (Html.BeginForm("CancleReservation", "Books", new { id = item.BookId }, FormMethod.Post))
-                    {
+                            @if (item.Status == Library.ViewModels.Status.Booked)
+                            {
+                                using (Html.BeginForm("CancleReservation", "Books", new { id = item.BookId }, FormMethod.Post))
+                                {
                                     @Html.Hidden("BookId", item.BookId)
                                     <input type="submit" value="Cancel" onclick="return confirm('Are you sure?')" class="btn btn-success" />
                                 }

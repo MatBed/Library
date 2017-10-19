@@ -14,18 +14,22 @@ namespace Library.ViewModels
         public int BookId { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
-        public string Type { get; set; }        
+        public string Type { get; set; }
+
+        [Display(Name = "Pages")]
         public int NumberOfPages { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
+
         public Status Status { get; set; }
     }
 
     public enum Status
     {
-        [EnumMember(Value = "Booked")]
-        Booked = 0,
         [EnumMember(Value = "Available")]
         Available = 1,
+
+        [EnumMember(Value = "Booked")]
+        Booked = 0,
+
         [EnumMember(Value = "Borrowed")]
         Borrowed = 2
     }
