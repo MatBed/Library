@@ -14,20 +14,20 @@ namespace OperationsOnData.Models
     {
         public int BookId { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
-        [MaxLength(140)]
+        //[Required(ErrorMessage = "This field is required!")]
+        //[MaxLength(140)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
-        [MaxLength(80)]
+        //[Required(ErrorMessage = "This field is required!")]
+        //[MaxLength(80)]
         public string Author { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
-        [MaxLength(50)]
+        //[Required(ErrorMessage = "This field is required!")]
+        //[MaxLength(50)]
         public string Type { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
-        [Display(Name = "Pages")]
+        //[Required(ErrorMessage = "This field is required!")]
+        //[Display(Name = "Pages")]
         public int NumberOfPages { get; set; }
 
         public Status Status { get; set; }

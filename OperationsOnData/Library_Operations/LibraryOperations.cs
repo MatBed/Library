@@ -1,6 +1,6 @@
 ﻿using OperationsOnData.Interfaces;
 using OperationsOnData.Models;
-using OperationsOnData.ViewModels;
+using OperationsOnData.Struct;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,6 +16,12 @@ namespace OperationsOnData.Library_Operations
         public LibraryOperations(ILibraryContext LibraryDb)
         {
             this.LibraryDb = LibraryDb;
+        }
+
+        struct BooksAndUserViewModel
+        {
+            User User { get; set; }
+            Book Book { get; set; }
         }
 
         public IQueryable<Book> GetBooks()
@@ -83,6 +89,7 @@ namespace OperationsOnData.Library_Operations
             {
                 var user = FindUserById(book.UserId);
                 book.BookingDate = DateTime.Now.Date;
+                book.EndBookingDate = book.BookingDate.Value.AddDays(3);
                 book.BorrowingDate = null;
                 book.ReturnDate = null;
             }
@@ -90,6 +97,7 @@ namespace OperationsOnData.Library_Operations
             if (book.Status == Status.Borrowed)
             {
                 book.BookingDate = null;
+                book.EndBookingDate = null;
                 book.BorrowingDate = DateTime.Now.Date;
                 book.ReturnDate = book.BorrowingDate.Value.AddDays(180);
             }
@@ -117,17 +125,16 @@ namespace OperationsOnData.Library_Operations
             return user;
         }
 
-        public BooksAndUserViewModel GetBooksOfUser(string id)
+        public BooksAndUser GetBooksOfUser(string userId)
         {
-            LibraryOperations libraryOperations = new LibraryOperations(LibraryDb);
-            BooksAndUserViewModel booksAndUserViewModel = new BooksAndUserViewModel();
-
+            BooksAndUser booksOfUser = new BooksAndUser();
             var allUsers = GetUsers();
-            var allBooks = libraryOperations.GetBooks();
-            booksAndUserViewModel.User = allUsers.Where(m => m.Id == id).FirstOrDefault();
-            booksAndUserViewModel.Books = allBooks.Where(m => m.UserId == id);
+            var allBooks = GetBooks();
 
-            return booksAndUserViewModel;
+            booksOfUser.User = allUsers.Where(m => m.Id == userId).FirstOrDefault();
+            booksOfUser.Books = allBooks.Where(m => m.UserId == userId);
+
+            return booksOfUser;
         }
 
         public void EditBook(Book book)

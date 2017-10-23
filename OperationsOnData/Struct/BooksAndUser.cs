@@ -1,13 +1,12 @@
 ﻿using OperationsOnData.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace OperationsOnData.ViewModels
+namespace OperationsOnData.Struct
 {
-    public class BooksAndUserViewModel
+    public struct BooksAndUser
     {
         public Book Book { get; set; }
         public User User { get; set; }

@@ -49,7 +49,13 @@ namespace AdminApp.Controllers
         public ActionResult Details(string id)
         {
             var foundUserAndBooks = libraryOperations.GetBooksOfUser(id);
-            return View(foundUserAndBooks);
+            var foundUserAndBooksVM = new BooksAndUserViewModel()
+            {
+                Book = foundUserAndBooks.Book,
+                Books = foundUserAndBooks.Books,
+                User = foundUserAndBooks.User
+            };
+            return View(foundUserAndBooksVM);
         }
 
         public ActionResult ChangeStatus(int id)

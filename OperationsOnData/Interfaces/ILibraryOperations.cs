@@ -1,5 +1,5 @@
 ﻿using OperationsOnData.Models;
-using OperationsOnData.ViewModels;
+using OperationsOnData.Struct;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +24,6 @@ namespace OperationsOnData.Interfaces
         IQueryable<User> GetUsers();
         void RemoveUser(string id);
         User FindUserById(string id);
-        BooksAndUserViewModel GetBooksOfUser(string id);
+        BooksAndUser GetBooksOfUser(string id);
     }
 }
