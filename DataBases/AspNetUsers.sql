@@ -24,7 +24,8 @@ CREATE TABLE [dbo].[AspNetUsers](
 	[Name] [nvarchar](max) NULL,
 	[SecondName] [nvarchar](max) NULL,
 	[NumberOfBooks] [tinyint] NULL,
-	[Discriminator] [nvarchar](128) NOT NULL
+	[Discriminator] [nvarchar](128) NOT NULL,
+	[Obligation] [float] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 

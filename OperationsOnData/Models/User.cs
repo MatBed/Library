@@ -27,6 +27,9 @@ namespace OperationsOnData.Models
         [Range(0, 5)]
         [Display(Name = "Count of books")]
         public byte NumberOfBooks { get; set; }
+        
+        [Range(0, 1000)]
+        public double Obligation { get; set; }
 
         public virtual ICollection<Book> Books { get; private set; }
 

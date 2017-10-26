@@ -25,6 +25,8 @@ namespace Library.Controllers
 
         public ActionResult Index()
         {
+            libraryOperations.SetObligation();
+            libraryOperations.SaveChanges();
             return View();
         }
 

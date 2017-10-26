@@ -19,7 +19,8 @@ namespace OperationsOnData.Interfaces
         void Booking(Book book, string id);
         void CancleBooking(Book book, string id);
         void ChangeStatus(Book book);
-        void ResetEndBookingDate();
+        //void ResetEndBookingDate();
+        void SetObligation();
 
         IQueryable<User> GetUsers();
         void RemoveUser(string id);

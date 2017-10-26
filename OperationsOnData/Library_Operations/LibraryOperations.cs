@@ -142,13 +142,27 @@ namespace OperationsOnData.Library_Operations
             LibraryDb.Entry(book).State = EntityState.Modified;
         }
 
-        public void ResetEndBookingDate()
+        public void SetObligation()
         {
-            var books = GetBooks();
-            var booksWithWrongDate = books.Where(m => m.EndBookingDate > DateTime.Now);
-
-            foreach (var item in booksWithWrongDate)
-                item.EndBookingDate = null;
+            var actuallDate = DateTime.Now;
+            int numberOfDays;
+            User foundUser;
+            var books = GetBooks().Where(m => m.UserId != null && m.ReturnDate < actuallDate).ToList();
+            foreach (var book in books)
+            {
+                numberOfDays = (actuallDate - (DateTime)book.ReturnDate).Days;
+                foundUser = FindUserById(book.UserId);
+                foundUser.Obligation = numberOfDays;
+            }
         }
+
+        //public void ResetEndBookingDate()
+        //{
+        //    var books = GetBooks();
+        //    var booksWithWrongDate = books.Where(m => m.EndBookingDate > DateTime.Now);
+
+        //    foreach (var item in booksWithWrongDate)
+        //        item.EndBookingDate = null;
+        //}
     }
 }
