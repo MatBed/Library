@@ -152,7 +152,7 @@ namespace OperationsOnData.Library_Operations
             {
                 numberOfDays = (actuallDate - (DateTime)book.ReturnDate).Days;
                 foundUser = FindUserById(book.UserId);
-                foundUser.Obligation = numberOfDays;
+                foundUser.Obligation += numberOfDays;
             }
         }
 

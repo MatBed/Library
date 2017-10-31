@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Library.Models;
-using OperationsOnData.Library_Operations;
 
 namespace Library.Controllers
 {
@@ -65,8 +64,12 @@ namespace Library.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
             var model = new IndexViewModel
             {
+                Name = user.Name,
+                SecondName = user.SecondName,
+                Obligation = user.Obligation,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
