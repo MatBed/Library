@@ -146,14 +146,26 @@ namespace OperationsOnData.Library_Operations
         {
             var actuallDate = DateTime.Now;
             int numberOfDays;
-            User foundUser;
-            var books = GetBooks().Where(m => m.UserId != null && m.ReturnDate < actuallDate).ToList();
-            foreach (var book in books)
+            List<Book> books;
+            List<int> obligation = new List<int>();
+            var users = GetUsers();
+
+            
+            foreach (var user in users)
             {
-                numberOfDays = (actuallDate - (DateTime)book.ReturnDate).Days;
-                foundUser = FindUserById(book.UserId);
-                foundUser.Obligation += numberOfDays;
+                books = GetBooks().Where(m => m.UserId == user.Id && m.ReturnDate < actuallDate).ToList();
+                foreach (var book in books)
+                {
+                    numberOfDays = (actuallDate - (DateTime)book.ReturnDate).Days;
+                    //foundUser = FindUserById(book.UserId);
+                    //foundUser.Obligation = numberOfDays;
+                    obligation.Add(numberOfDays);
+                }
+                user.Obligation = obligation.Sum();
+                obligation.RemoveRange(0, obligation.Count);
             }
+            //foundUser = FindUserById(book.UserId);
+            //foundUser.Obligation = numberOfDays;
         }
 
         //public void ResetEndBookingDate()
