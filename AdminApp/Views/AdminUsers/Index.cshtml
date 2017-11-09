@@ -31,15 +31,15 @@
 
 <script src="~/Scripts/jquery-3.2.1.min.js"></script>
 <script>
-        function RenderHTMLActionButtons(id)
-        {
-            return `<center><a class="btn btn-primary" href= "@Html.Raw(HttpUtility.UrlDecode(Url.Action("Details", "AdminUsers", new { id = "{{id}}" })))">
-                        Details
-                    </a> |
-                    <form action="@Html.Raw(HttpUtility.UrlDecode(Url.Action("Delete", "AdminUsers", new { id = "{{id}}" })))" method="post">
-                        <input type="submit" value="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger">
-                    </form></center>`
-            .replace(/{{id}}/g, id);
+    function RenderHTMLActionButtons(id)
+    {
+        return `<center><a class="btn btn-primary" href= "@Html.Raw(HttpUtility.UrlDecode(Url.Action("Details", "AdminUsers", new { id = "{{id}}" })))">
+                    Details
+                </a> |
+                <form action="@Html.Raw(HttpUtility.UrlDecode(Url.Action("Delete", "AdminUsers", new { id = "{{id}}" })))" method="post">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger">
+                </form></center>`
+        .replace(/{{id}}/g, id);
     }
 
     $(document).ready(function () {
@@ -62,7 +62,12 @@
                         return RenderHTMLActionButtons(data['Id']);
                     }
                 }
-            ]
+            ],
+            "createdRow": function (row, data, index) {
+                if (data.Obligation > 0) {
+                    $('td', row).addClass('highlight');
+                }
+            }
         })
     })
 </script>
@@ -70,6 +75,10 @@
 <style>
     form {
         display: inline-block;
+    }
+
+    td.highlight {
+        color: red;
     }
 </style>
 
