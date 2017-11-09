@@ -138,6 +138,10 @@
     <Compile Include="Migrations\201709131649539_initial.Designer.cs">
       <DependentUpon>201709131649539_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711091342488_add obligation.cs" />
+    <Compile Include="Migrations\201711091342488_add obligation.Designer.cs">
+      <DependentUpon>201711091342488_add obligation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -148,6 +152,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709131649539_initial.resx">
       <DependentUpon>201709131649539_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091342488_add obligation.resx">
+      <DependentUpon>201711091342488_add obligation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

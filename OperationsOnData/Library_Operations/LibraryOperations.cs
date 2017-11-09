@@ -32,8 +32,17 @@ namespace OperationsOnData.Library_Operations
 
         public void AddBook(Book book)
         {
-            var maxId = GetBooks().Max(m => m.BookId);
-            book.BookId = maxId + 1;
+            if (LibraryDb.Books.Count() > 0)
+            {
+                var maxId = GetBooks().Max(m => m.BookId);
+                book.BookId = maxId + 1;
+            }
+            else
+            {
+                var maxId = 1;
+                book.BookId = maxId;
+            }                
+
             LibraryDb.Books.Add(book);
         }
 
