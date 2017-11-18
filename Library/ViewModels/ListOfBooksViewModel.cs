@@ -24,13 +24,8 @@ namespace Library.ViewModels
 
     public enum Status
     {
-        [EnumMember(Value = "Available")]
-        Available = 1,
-
-        [EnumMember(Value = "Booked")]
-        Booked = 0,
-
-        [EnumMember(Value = "Borrowed")]
-        Borrowed = 2
+        Booked,
+        Available,
+        Borrowed
     }
 }

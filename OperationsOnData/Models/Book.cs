@@ -14,20 +14,13 @@ namespace OperationsOnData.Models
     {
         public int BookId { get; set; }
 
-        //[Required(ErrorMessage = "This field is required!")]
-        //[MaxLength(140)]
         public string Title { get; set; }
 
-        //[Required(ErrorMessage = "This field is required!")]
-        //[MaxLength(80)]
         public string Author { get; set; }
 
-        //[Required(ErrorMessage = "This field is required!")]
-        //[MaxLength(50)]
         public string Type { get; set; }
 
-        //[Required(ErrorMessage = "This field is required!")]
-        //[Display(Name = "Pages")]
+        [Display(Name = "Pages")]
         public int NumberOfPages { get; set; }
 
         public Status Status { get; set; }
@@ -58,15 +51,11 @@ namespace OperationsOnData.Models
         public User User { get; set; }
     }
 
+
     public enum Status
     {
-        [EnumMember(Value = "Available")]
-        Available = 1,
-
-        [EnumMember(Value = "Booked")]
-        Booked = 0,
-
-        [EnumMember(Value = "Borrowed")]
-        Borrowed = 2
+        Booked,
+        Available,
+        Borrowed
     }
 }

@@ -23,6 +23,13 @@ namespace Library.Controllers
             this.libraryOperations = libraryOperations;
         }
 
+        public static Dictionary<int, string> Status = new Dictionary<int, string>
+        {
+                {1,"Available"},
+                {0,"Booked"},
+                {2,"Borrowed"}
+        };
+
         public ActionResult Index()
         {
             libraryOperations.SetObligation();
@@ -38,7 +45,7 @@ namespace Library.Controllers
                           {
                               Title = book.Title,
                               Type = book.Type,
-                              Status = (ViewModels.Status)book.Status,
+                              Status = (Library.ViewModels.Status)book.Status,
                               Author = book.Author,
                               NumberOfPages = book.NumberOfPages,
                               BookId = book.BookId

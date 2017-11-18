@@ -67,8 +67,17 @@
                         return RenderHTMLActionButtons(data['BookId']);
                     }
                 }
-            ]
-
+            ],
+            "columnDefs": [{
+                "targets": 4,
+                "render": function (data) {
+                    switch (data) {
+                        case 1: return "Available";
+                        case 2: return "Borrowed";
+                        case 0: return "Booked";
+                    }
+                }
+            }]
         })
 
 

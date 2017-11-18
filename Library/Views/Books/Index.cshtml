@@ -49,6 +49,7 @@
                 "ajax": {
                     "url": '/books/GetBooks',
                     "type": "get",
+                    "responsive": true,
                     "datatype": "json"
                 },
                 "columns": [
@@ -56,7 +57,11 @@
                     { "data": "Author", "autoWidth": true },
                     { "data": "Type", "autoWidth": true },
                     { "data": "NumberOfPages", "autoWidth": true },
-                    { "data": "Status", "autoWidth": true },
+                    {
+                        "data": "Status",
+                        "autoWidth": true
+                        
+                    },
                     {
                         "title": '',
                         "data": null,
@@ -72,6 +77,17 @@
                         }
                     }
                 ],
+
+                "columnDefs": [{
+                    "targets": 4,
+                    "render": function (data) {
+                        switch (data) {
+                            case 1: return "Available";
+                            case 2: return "Borrowed";
+                            case 0: return "Booked";
+                        }
+                    }
+                }]
                 
             })
         })
