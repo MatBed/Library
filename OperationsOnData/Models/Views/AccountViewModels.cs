@@ -72,7 +72,7 @@ namespace Library.Models
         public string SecondName { get; set; }
 
         [Required(ErrorMessage = "Email is required!")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email is incorrect!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

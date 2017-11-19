@@ -58,7 +58,7 @@
 
 <center><h2>Borrowed/Booked Books</h2></center>
 <br />
-<table class="table">
+<table class="table" style="width:90%; margin:0 auto;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Book.Title)
@@ -90,39 +90,79 @@
         <th>Action</th>
     </tr>
 
+
+
     @foreach (var item in Model.Books)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfPages)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndBookingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BorrowingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReturnDate)
-            </td>
-            <td>
-                @Html.ActionLink("Change status", "ChangeStatus", "AdminUsers", new { id = item.BookId }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
+        if (item.ReturnDate >= DateTime.Now || item.ReturnDate==null)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfPages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndBookingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BorrowingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Change status", "ChangeStatus", "AdminUsers", new { id = item.BookId }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr style="color:red;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfPages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndBookingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BorrowingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Change status", "ChangeStatus", "AdminUsers", new { id = item.BookId }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
     }
 </table>

@@ -38,23 +38,46 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Author)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BorrowingDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReturnDate)
-                        </td>
-                    </tr>
+                    if (item.ReturnDate >= DateTime.Now)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BorrowingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReturnDate)
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr style="color:red;">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BorrowingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReturnDate)
+                            </td>
+                        </tr>
+                    }
                 }
             </table>
         </div>
