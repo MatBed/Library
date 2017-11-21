@@ -54,7 +54,8 @@ namespace OperationsOnData.Library_Operations
         public void RemoveBook(int id)
         {
             var book = FindById(id);
-            LibraryDb.Books.Remove(book);
+            if(book.Status == Status.Available)
+                LibraryDb.Books.Remove(book);
         }
 
         public Book FindById(int id)
@@ -124,7 +125,7 @@ namespace OperationsOnData.Library_Operations
         {
             var user = FindUserById(id);
 
-            if (user.NumberOfBooks == 0)
+            if (user.NumberOfBooks == 0 && user.Obligation == 0)
                 LibraryDb.Users.Remove(user);
         }
 
