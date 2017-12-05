@@ -21,8 +21,18 @@ namespace AdminApp.Controllers
 
         public ActionResult Index()
         {
-            libraryOperations.SetObligation();
-            libraryOperations.SaveChanges();
+            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
+            {
+                libraryOperations.ResetBookingBooks();
+                libraryOperations.SaveChanges();
+            }
+
+            if (libraryOperations.GetBooks().Any(m => m.ReturnDate > DateTime.Now))
+            {
+                libraryOperations.SetObligation();
+                libraryOperations.SaveChanges();
+            }
+
             return View();
         }
 

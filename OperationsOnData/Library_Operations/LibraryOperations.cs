@@ -173,13 +173,17 @@ namespace OperationsOnData.Library_Operations
             }
         }
 
-        //public void ResetEndBookingDate()
-        //{
-        //    var books = GetBooks();
-        //    var booksWithWrongDate = books.Where(m => m.EndBookingDate > DateTime.Now);
+        public void ResetBookingBooks()
+        {
+            var books = GetBooks();
+            var booksWithWrongDate = books.Where(m => m.EndBookingDate > DateTime.Now);
 
-        //    foreach (var item in booksWithWrongDate)
-        //        item.EndBookingDate = null;
-        //}
+            foreach (var item in booksWithWrongDate)
+            {
+                item.Status = Status.Available;
+                item.EndBookingDate = null;
+                item.BookingDate = null;
+            }
+        }
     }
 }

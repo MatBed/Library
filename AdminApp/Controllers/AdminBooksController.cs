@@ -20,6 +20,12 @@ namespace AdminApp.Controllers
 
         public ActionResult Index()
         {
+            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
+            {
+                libraryOperations.ResetBookingBooks();
+                libraryOperations.SaveChanges();
+            }
+
             return View();
         }
 
@@ -30,6 +36,7 @@ namespace AdminApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             try

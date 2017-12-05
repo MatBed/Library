@@ -23,17 +23,20 @@ namespace Library.Controllers
             this.libraryOperations = libraryOperations;
         }
 
-        public static Dictionary<int, string> Status = new Dictionary<int, string>
-        {
-                {1,"Available"},
-                {0,"Booked"},
-                {2,"Borrowed"}
-        };
-
         public ActionResult Index()
         {
-            libraryOperations.SetObligation();
-            libraryOperations.SaveChanges();
+            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
+            { 
+                libraryOperations.ResetBookingBooks();
+                libraryOperations.SaveChanges();
+            }
+
+            if(libraryOperations.GetBooks().Any(m => m.ReturnDate > DateTime.Now))
+            {
+                libraryOperations.SetObligation();
+                libraryOperations.SaveChanges();
+            }            
+            
             return View();
         }
 
@@ -56,6 +59,11 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult ShowBookedBooks()
         {
+            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
+            {
+                libraryOperations.ResetBookingBooks();
+                libraryOperations.SaveChanges();
+            }
             var userId = User.Identity.GetUserId();
             var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Booked && m.UserId == userId);
             var booksVM = from book in books
@@ -77,6 +85,11 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult ShowBorrowedBooks()
         {
+            if (libraryOperations.GetBooks().Any(m => m.ReturnDate > DateTime.Now))
+            {
+                libraryOperations.SetObligation();
+                libraryOperations.SaveChanges();
+            }
             var userId = User.Identity.GetUserId();
             var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Borrowed && m.UserId == userId);
             var booksVM = from book in books
