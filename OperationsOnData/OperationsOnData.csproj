@@ -146,6 +146,7 @@
       <DependentUpon>201711091342488_add obligation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Key.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\User.cs" />
@@ -172,7 +173,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52172</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

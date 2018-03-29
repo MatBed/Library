@@ -1,11 +1,34 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model AdminApp.ViewModels.KeyViewModel
+
+@{
+                /**/
+
+                ViewBag.Title = "Home Page";
 }
 <div class="page-title">
     <div>
         <h1><i class="fa fa-home"></i> Home Page</h1>
     </div>
 </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AccessKey, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.AccessKey, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AccessKey, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value="Submit" class="btn btn-success" /> <br /><br />
+        </div>
+    </div>
+}
+
 <center>
     <img class="embed-responsive-item, img-responsive" src="~/Images/book-1294379_960_720.png" />
 </center>
