@@ -136,8 +136,11 @@
     <Compile Include="DAL\LibraryContext.cs" />
     <Compile Include="Infrastructure\Abstract\IAuthProvider.cs" />
     <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
+    <Compile Include="Interfaces\IBooksOperations.cs" />
     <Compile Include="Interfaces\ILibraryContext.cs" />
     <Compile Include="Interfaces\ILibraryOperations.cs" />
+    <Compile Include="Interfaces\ISaveDatabase.cs" />
+    <Compile Include="Interfaces\IUserOperations.cs" />
     <Compile Include="Library_Operations\LibraryOperations.cs" />
     <Compile Include="Migrations\201709131649539_initial.cs" />
     <Compile Include="Migrations\201709131649539_initial.Designer.cs">

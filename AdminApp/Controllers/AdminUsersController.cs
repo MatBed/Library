@@ -13,25 +13,36 @@ namespace AdminApp.Controllers
     [Authorize]
     public class AdminUsersController : Controller
     {
-        private readonly ILibraryOperations libraryOperations;
+        private readonly IUserOperations userOperations;
+        private readonly ISaveDatabase db;
+        private readonly IBooksOperations bookOperations;
 
-        public AdminUsersController(ILibraryOperations libraryOperations)
+        public AdminUsersController(IUserOperations userOpe, ISaveDatabase db, IBooksOperations booksOpe)
         {
-            this.libraryOperations = libraryOperations;
+            userOperations = userOpe;
+            this.db = db;
+            bookOperations = booksOpe;
         }
+
+        //private readonly ILibraryOperations libraryOperations;
+
+        //public AdminUsersController(ILibraryOperations libraryOperations)
+        //{
+        //    this.libraryOperations = libraryOperations;
+        //}
 
         public ActionResult Index()
         {
-            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
+            if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
             {
-                libraryOperations.ResetBookingBooks();
-                libraryOperations.SaveChanges();
+                userOperations.ResetBookingBooks();
+                db.SaveChanges();
             }
 
-            if (libraryOperations.GetBooks().Any(m => m.ReturnDate > DateTime.Now))
+            if (bookOperations.GetBooks().Any(m => m.ReturnDate < DateTime.Now))
             {
-                libraryOperations.SetObligation();
-                libraryOperations.SaveChanges();
+                userOperations.SetObligation();
+                db.SaveChanges();
             }
 
             return View();
@@ -39,7 +50,7 @@ namespace AdminApp.Controllers
 
         public ActionResult GetUsers()
         {
-            var users = libraryOperations.GetUsers();
+            var users = userOperations.GetUsers();
             return Json(new { data = users }, JsonRequestBehavior.AllowGet);
         }
 
@@ -48,8 +59,8 @@ namespace AdminApp.Controllers
         {
             try
             {
-                libraryOperations.RemoveUser(id);
-                libraryOperations.SaveChanges();
+                userOperations.RemoveUser(id);
+                db.SaveChanges();
             }
             catch
             {
@@ -61,7 +72,7 @@ namespace AdminApp.Controllers
 
         public ActionResult Details(string id)
         {
-            var foundUserAndBooks = libraryOperations.GetBooksOfUser(id);
+            var foundUserAndBooks = bookOperations.GetBooksOfUser(id);
             var foundUserAndBooksVM = new BooksAndUserViewModel()
             {
                 Book = foundUserAndBooks.Book,
@@ -73,7 +84,7 @@ namespace AdminApp.Controllers
 
         public ActionResult ChangeStatus(int id)
         {
-            var book = libraryOperations.FindById(id);
+            var book = bookOperations.FindById(id);
             return View(book);
         }
 
@@ -83,8 +94,8 @@ namespace AdminApp.Controllers
             var userId = book.UserId;
             try
             {
-                libraryOperations.ChangeStatus(book);
-                libraryOperations.SaveChanges();
+                bookOperations.ChangeStatus(book);
+                db.SaveChanges();
             }
             catch
             {

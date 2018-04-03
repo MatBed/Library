@@ -12,19 +12,30 @@ namespace AdminApp.Controllers
     [Authorize]
     public class AdminBooksController : Controller
     {
-        private readonly ILibraryOperations libraryOperations;
+        private readonly IUserOperations userOperations;
+        private readonly ISaveDatabase db;
+        private readonly IBooksOperations bookOperations;
 
-        public AdminBooksController(ILibraryOperations libraryOperations)
+        public AdminBooksController(IUserOperations userOpe, ISaveDatabase db, IBooksOperations booksOpe)
         {
-            this.libraryOperations = libraryOperations;
+            userOperations = userOpe;
+            this.db = db;
+            bookOperations = booksOpe;
         }
+
+        //private readonly ILibraryOperations libraryOperations;
+
+        //public AdminBooksController(ILibraryOperations libraryOperations)
+        //{
+        //    this.libraryOperations = libraryOperations;
+        //}
 
         public ActionResult Index()
         {
-            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
+            if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
             {
-                libraryOperations.ResetBookingBooks();
-                libraryOperations.SaveChanges();
+                userOperations.ResetBookingBooks();
+                db.SaveChanges();
             }
 
             return View();
@@ -32,18 +43,18 @@ namespace AdminApp.Controllers
 
         public ActionResult GetBooks()
         {
-            var books = libraryOperations.GetBooks();
+            var books = bookOperations.GetBooks();
             return Json(new { data = books }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             try
             {
-                libraryOperations.RemoveBook(id);
-                libraryOperations.SaveChanges();
+                bookOperations.RemoveBook(id);
+                db.SaveChanges();
             }
             catch
             {
@@ -71,8 +82,8 @@ namespace AdminApp.Controllers
 
             if (ModelState.IsValid)
             {
-                libraryOperations.AddBook(book);
-                libraryOperations.SaveChanges();
+                bookOperations.AddBook(book);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
@@ -81,7 +92,7 @@ namespace AdminApp.Controllers
 
         public ActionResult Edit(int id)
         {
-            var foundBook = libraryOperations.FindById(id);
+            var foundBook = bookOperations.FindById(id);
             BookViewModel bookVM = new BookViewModel {
                 BookId = foundBook.BookId,
                 Author = foundBook.Author,
@@ -109,8 +120,8 @@ namespace AdminApp.Controllers
 
             if (ModelState.IsValid)
             {
-                libraryOperations.EditBook(book);
-                libraryOperations.SaveChanges();
+                bookOperations.EditBook(book);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else

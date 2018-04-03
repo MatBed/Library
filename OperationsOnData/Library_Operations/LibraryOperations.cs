@@ -9,7 +9,7 @@ using System.Web;
 
 namespace OperationsOnData.Library_Operations
 {
-    public class LibraryOperations : ILibraryOperations
+    public class LibraryOperations : ISaveDatabase, IUserOperations, IBooksOperations
     {
         private readonly ILibraryContext LibraryDb;
 
@@ -18,11 +18,11 @@ namespace OperationsOnData.Library_Operations
             this.LibraryDb = LibraryDb;
         }
 
-        struct BooksAndUserViewModel
-        {
-            User User { get; set; }
-            Book Book { get; set; }
-        }
+        //struct BooksAndUserViewModel
+        //{
+        //    User User { get; set; }
+        //    Book Book { get; set; }
+        //}
 
         public IQueryable<Book> GetBooks()
         {
@@ -173,16 +173,17 @@ namespace OperationsOnData.Library_Operations
             }
         }
 
-        public void ResetBookingBooks()
+        public void ResetBookingBooks() //zmniejszyc ilosc ksiazek uzytkownika
         {
             var books = GetBooks();
-            var booksWithWrongDate = books.Where(m => m.EndBookingDate > DateTime.Now);
+            var booksWithWrongDate = books.Where(m => m.EndBookingDate < DateTime.Now);
 
             foreach (var item in booksWithWrongDate)
             {
                 item.Status = Status.Available;
                 item.EndBookingDate = null;
                 item.BookingDate = null;
+                item.UserId = null;
             }
         }
     }

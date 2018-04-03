@@ -9,18 +9,30 @@ namespace Library.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILibraryOperations libraryOperations;
+        private readonly IUserOperations userOperations;
+        private readonly ISaveDatabase db;
+        private readonly IBooksOperations bookOperations;
 
-        public HomeController(ILibraryOperations libraryOperations)
+        public HomeController(IUserOperations userOpe, ISaveDatabase db, IBooksOperations booksOpe)
         {
-            this.libraryOperations = libraryOperations;
+            userOperations = userOpe;
+            this.db = db;
+            bookOperations = booksOpe;
         }
+
+        //private readonly ILibraryOperations libraryOperations;
+
+        //public HomeController(ILibraryOperations libraryOperations)
+        //{
+        //    this.libraryOperations = libraryOperations;
+        //}
+
         public ActionResult Index()
         {
-            if (libraryOperations.GetBooks().Any(m => m.ReturnDate > DateTime.Now))
+            if (bookOperations.GetBooks().Any(m => m.ReturnDate < DateTime.Now))
             {
-                libraryOperations.SetObligation();
-                libraryOperations.SaveChanges();
+                userOperations.SetObligation();
+                db.SaveChanges();
             }
             return View();
         }

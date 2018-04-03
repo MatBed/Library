@@ -16,25 +16,35 @@ namespace Library.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly ILibraryOperations libraryOperations;
+        //private readonly ILibraryOperations libraryOperations;
+        private readonly IUserOperations userOperations;
+        private readonly ISaveDatabase db;
+        private readonly IBooksOperations bookOperations;
 
-        public BooksController(ILibraryOperations libraryOperations)
+        public BooksController(IUserOperations userOpe, ISaveDatabase db, IBooksOperations booksOpe)
         {
-            this.libraryOperations = libraryOperations;
+            userOperations = userOpe;
+            this.db = db;
+            bookOperations = booksOpe;
         }
+
+        //public BooksController(ILibraryOperations libraryOperations)
+        //{
+        //    this.libraryOperations = libraryOperations;
+        //}
 
         public ActionResult Index()
         {
-            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
-            { 
-                libraryOperations.ResetBookingBooks();
-                libraryOperations.SaveChanges();
+            if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
+            {
+                userOperations.ResetBookingBooks();
+                db.SaveChanges();
             }
 
-            if(libraryOperations.GetBooks().Any(m => m.ReturnDate > DateTime.Now))
+            if(bookOperations.GetBooks().Any(m => m.ReturnDate < DateTime.Now))
             {
-                libraryOperations.SetObligation();
-                libraryOperations.SaveChanges();
+                userOperations.SetObligation();
+                db.SaveChanges();
             }            
             
             return View();
@@ -42,7 +52,7 @@ namespace Library.Controllers
 
         public ActionResult GetBooks()
         {
-            var books = libraryOperations.GetBooks();
+            var books = bookOperations.GetBooks();
             var booksVM = from book in books
                           select new ListOfBooksViewModel
                           {
@@ -59,13 +69,13 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult ShowBookedBooks()
         {
-            if (libraryOperations.GetBooks().Any(m => m.EndBookingDate > DateTime.Now))
+            if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
             {
-                libraryOperations.ResetBookingBooks();
-                libraryOperations.SaveChanges();
+                userOperations.ResetBookingBooks();
+                db.SaveChanges();
             }
             var userId = User.Identity.GetUserId();
-            var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Booked && m.UserId == userId);
+            var books = bookOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Booked && m.UserId == userId);
             var booksVM = from book in books
                           select new BookedBookViewModel
                           {
@@ -85,13 +95,13 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult ShowBorrowedBooks()
         {
-            if (libraryOperations.GetBooks().Any(m => m.ReturnDate > DateTime.Now))
+            if (bookOperations.GetBooks().Any(m => m.ReturnDate < DateTime.Now))
             {
-                libraryOperations.SetObligation();
-                libraryOperations.SaveChanges();
+                userOperations.SetObligation();
+                db.SaveChanges();
             }
             var userId = User.Identity.GetUserId();
-            var books = libraryOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Borrowed && m.UserId == userId);
+            var books = bookOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Borrowed && m.UserId == userId);
             var booksVM = from book in books
                           select new BorrowedBookViewModel
                           {
@@ -110,17 +120,18 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult Reservation(int id)
         {
-            var book = libraryOperations.FindById(id);
+            var book = bookOperations.FindById(id);
             var userId = User.Identity.GetUserId();
 
             try
             {
-                libraryOperations.Booking(book, userId);
+                userOperations.Booking(book, userId);
                 book.UserId = userId;
-                libraryOperations.SaveChanges();
+                db.SaveChanges();
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return View("Index");
             }
 
@@ -131,14 +142,14 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult CancleReservation(int id)
         {
-            var book = libraryOperations.FindById(id);
+            var book = bookOperations.FindById(id);
             var userId = User.Identity.GetUserId();
 
             try
             {
-                libraryOperations.CancleBooking(book, userId);
+                userOperations.CancleBooking(book, userId);
                 book.UserId = null;
-                libraryOperations.SaveChanges();
+                db.SaveChanges();
             }
             catch
             {
