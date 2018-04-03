@@ -134,6 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\LibraryContext.cs" />
+    <Compile Include="Infrastructure\Abstract\IAuthProvider.cs" />
+    <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
     <Compile Include="Interfaces\ILibraryContext.cs" />
     <Compile Include="Interfaces\ILibraryOperations.cs" />
     <Compile Include="Library_Operations\LibraryOperations.cs" />

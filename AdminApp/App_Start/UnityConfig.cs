@@ -4,6 +4,8 @@ using Microsoft.Practices.Unity.Configuration;
 using OperationsOnData.Interfaces;
 using OperationsOnData.DAL;
 using OperationsOnData.Library_Operations;
+using OperationsOnData.Infrastructure.Abstract;
+using OperationsOnData.Infrastructure.Concrete;
 
 namespace AdminApp.App_Start
 {
@@ -42,6 +44,7 @@ namespace AdminApp.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<ILibraryContext, LibraryContext>(new PerRequestLifetimeManager());
             container.RegisterType<ILibraryOperations, LibraryOperations>(new PerRequestLifetimeManager());
+            container.RegisterType<IAuthProvider, FormsAuthProvider>(new PerRequestLifetimeManager());
         }
     }
 }

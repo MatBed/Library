@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace AdminApp.Controllers
 {
+    [Authorize]
     public class AdminUsersController : Controller
     {
         private readonly ILibraryOperations libraryOperations;

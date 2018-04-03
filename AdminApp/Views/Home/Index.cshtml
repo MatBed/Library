@@ -19,11 +19,18 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+            </div>
+
             @Html.LabelFor(model => model.AccessKey, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.AccessKey, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AccessKey, "", new { @class = "text-danger" })
             </div>
+            <br />
             <input type="submit" value="Submit" class="btn btn-success" /> <br /><br />
         </div>
     </div>

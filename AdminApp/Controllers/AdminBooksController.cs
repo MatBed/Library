@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace AdminApp.Controllers
 {
+    [Authorize]
     public class AdminBooksController : Controller
     {
         private readonly ILibraryOperations libraryOperations;
