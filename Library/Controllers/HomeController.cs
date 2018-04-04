@@ -20,13 +20,6 @@ namespace Library.Controllers
             bookOperations = booksOpe;
         }
 
-        //private readonly ILibraryOperations libraryOperations;
-
-        //public HomeController(ILibraryOperations libraryOperations)
-        //{
-        //    this.libraryOperations = libraryOperations;
-        //}
-
         public ActionResult Index()
         {
             if (bookOperations.GetBooks().Any(m => m.ReturnDate < DateTime.Now))

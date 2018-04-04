@@ -1,4 +1,5 @@
 ﻿using AdminApp.ViewModels;
+using Microsoft.AspNet.Identity;
 using OperationsOnData.Interfaces;
 using OperationsOnData.Models;
 using System;
@@ -23,18 +24,12 @@ namespace AdminApp.Controllers
             bookOperations = booksOpe;
         }
 
-        //private readonly ILibraryOperations libraryOperations;
-
-        //public AdminBooksController(ILibraryOperations libraryOperations)
-        //{
-        //    this.libraryOperations = libraryOperations;
-        //}
-
         public ActionResult Index()
         {
             if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
             {
-                userOperations.ResetBookingBooks();
+                var userId = User.Identity.GetUserId();
+                userOperations.ResetBookingBooks(userId);
                 db.SaveChanges();
             }
 
@@ -48,7 +43,6 @@ namespace AdminApp.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             try

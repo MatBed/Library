@@ -138,7 +138,6 @@
     <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
     <Compile Include="Interfaces\IBooksOperations.cs" />
     <Compile Include="Interfaces\ILibraryContext.cs" />
-    <Compile Include="Interfaces\ILibraryOperations.cs" />
     <Compile Include="Interfaces\ISaveDatabase.cs" />
     <Compile Include="Interfaces\IUserOperations.cs" />
     <Compile Include="Library_Operations\LibraryOperations.cs" />

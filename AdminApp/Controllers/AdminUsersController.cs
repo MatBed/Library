@@ -1,4 +1,5 @@
 ﻿using AdminApp.ViewModels;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using OperationsOnData.Interfaces;
 using OperationsOnData.Models;
@@ -24,18 +25,12 @@ namespace AdminApp.Controllers
             bookOperations = booksOpe;
         }
 
-        //private readonly ILibraryOperations libraryOperations;
-
-        //public AdminUsersController(ILibraryOperations libraryOperations)
-        //{
-        //    this.libraryOperations = libraryOperations;
-        //}
-
         public ActionResult Index()
         {
             if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
             {
-                userOperations.ResetBookingBooks();
+                var userId = User.Identity.GetUserId();
+                userOperations.ResetBookingBooks(userId);
                 db.SaveChanges();
             }
 

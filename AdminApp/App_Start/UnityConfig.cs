@@ -43,7 +43,6 @@ namespace AdminApp.App_Start
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<ILibraryContext, LibraryContext>(new PerRequestLifetimeManager());
-            //container.RegisterType<ILibraryOperations, LibraryOperations>(new PerRequestLifetimeManager());
             container.RegisterType<IBooksOperations, LibraryOperations>(new PerRequestLifetimeManager());
             container.RegisterType<IUserOperations, LibraryOperations>(new PerRequestLifetimeManager());
             container.RegisterType<ISaveDatabase, LibraryOperations>(new PerRequestLifetimeManager());

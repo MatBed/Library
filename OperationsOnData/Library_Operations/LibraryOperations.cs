@@ -18,12 +18,6 @@ namespace OperationsOnData.Library_Operations
             this.LibraryDb = LibraryDb;
         }
 
-        //struct BooksAndUserViewModel
-        //{
-        //    User User { get; set; }
-        //    Book Book { get; set; }
-        //}
-
         public IQueryable<Book> GetBooks()
         {
             var books = LibraryDb.Books;
@@ -173,9 +167,11 @@ namespace OperationsOnData.Library_Operations
             }
         }
 
-        public void ResetBookingBooks() //zmniejszyc ilosc ksiazek uzytkownika
+        public void ResetBookingBooks(string userId)
         {
             var books = GetBooks();
+            var user = FindUserById(userId);
+            user.NumberOfBooks--;
             var booksWithWrongDate = books.Where(m => m.EndBookingDate < DateTime.Now);
 
             foreach (var item in booksWithWrongDate)
@@ -184,7 +180,7 @@ namespace OperationsOnData.Library_Operations
                 item.EndBookingDate = null;
                 item.BookingDate = null;
                 item.UserId = null;
-            }
+            }            
         }
     }
 }

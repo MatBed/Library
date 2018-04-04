@@ -14,7 +14,7 @@ namespace OperationsOnData.Interfaces
         User FindUserById(string id);
         void Booking(Book book, string id);
         void CancleBooking(Book book, string id);
-        void ResetBookingBooks();
+        void ResetBookingBooks(string userId);
         void SetObligation();
     }
 }

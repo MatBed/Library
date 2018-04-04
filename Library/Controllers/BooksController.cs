@@ -16,7 +16,6 @@ namespace Library.Controllers
 {
     public class BooksController : Controller
     {
-        //private readonly ILibraryOperations libraryOperations;
         private readonly IUserOperations userOperations;
         private readonly ISaveDatabase db;
         private readonly IBooksOperations bookOperations;
@@ -28,16 +27,12 @@ namespace Library.Controllers
             bookOperations = booksOpe;
         }
 
-        //public BooksController(ILibraryOperations libraryOperations)
-        //{
-        //    this.libraryOperations = libraryOperations;
-        //}
-
         public ActionResult Index()
         {
             if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
             {
-                userOperations.ResetBookingBooks();
+                var userId = User.Identity.GetUserId();
+                userOperations.ResetBookingBooks(userId);
                 db.SaveChanges();
             }
 
@@ -69,12 +64,14 @@ namespace Library.Controllers
         [Authorize]
         public ActionResult ShowBookedBooks()
         {
+            var userId = User.Identity.GetUserId();
+
             if (bookOperations.GetBooks().Any(m => m.EndBookingDate < DateTime.Now))
             {
-                userOperations.ResetBookingBooks();
+                userOperations.ResetBookingBooks(userId);
                 db.SaveChanges();
             }
-            var userId = User.Identity.GetUserId();
+            
             var books = bookOperations.GetBooks().Where(m => m.Status == OperationsOnData.Models.Status.Booked && m.UserId == userId);
             var booksVM = from book in books
                           select new BookedBookViewModel
